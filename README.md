@@ -191,13 +191,13 @@ This project is developed by a collaborative team of 3 students:
 
 ### Team Members
 
-**1. Ala Malik Ibrahim (Repository Owner)**
-- Role: Frontend Developer & Project Lead
-- GitHub: [@alamalik](https://github.com/alamalik)
-- Email: alamalik305@gmail.com
-- Phone: 07510268589
+**1. rumaisa karim (Repository Owner)**
+- Role: Frontend Developer
+- GitHub: [@rumaisa00](https://github.com/rumaisa00)
+- Email: ensw05322@student.su.edu.krd
+- Phone: *********
 
-**2. Rumaitha Kareem**
+**2. ala malik**
 - Role: UI/UX Designer & Frontend Developer
 - GitHub: TBD
 - Email: TBD
@@ -209,7 +209,7 @@ This project is developed by a collaborative team of 3 students:
 
 ### Team Collaboration
 
-- **Repository**: [github.com/alamalik/my-project.github.io](https://github.com/alamalik/my-project.github.io)
+- **Repository**: [github.com/rumaisa00/my-project.github.io](https://rumaisa00.github.io/vuework/)
 - **Coordination**: Weekly team meetings and GitHub Issues
 - **Task Management**: Using GitHub Projects board
 
