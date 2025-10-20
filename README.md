@@ -191,22 +191,27 @@ This project is developed by a collaborative team of 3 students:
 
 ### Team Members
 
-**1. rumaisa karim (Repository Owner)**
-- Role: Frontend Developer
+1. rumaisa karim (Repository Owner)
 - GitHub: [@rumaisa00](https://github.com/rumaisa00)
 - Email: ensw05322@student.su.edu.krd
 - Phone: *********
 
-**2. ala malik**
-- Role: UI/UX Designer & Frontend Developer
+2. ala malik
 - GitHub: TBD
 - Email: TBD
 
-**3. Sara Khalil**
-- Role: Full Stack Developer & Quality Assurance
+3. Sara Khalil
 - GitHub: TBD
 - Email: TBD
 
+4- mohammed safin
+- GitHub: TBD
+- Email: TBD
+
+5- mohamed abdulkareem
+- GitHub: TBD
+- Email: TBD
+- 
 ### Team Collaboration
 
 - **Repository**: [github.com/rumaisa00/my-project.github.io](https://rumaisa00.github.io/vuework/)
