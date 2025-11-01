@@ -2,18 +2,18 @@
 
 ![CI Status](https://github.com/yourusername/vuework/workflows/CI/badge.svg)
 
-## 📋 Problem Statement
+## Problem Statement
 
 Small teams often struggle with fragmented task management across emails, spreadsheets, and sticky notes. Communication breaks down, deadlines are missed, and there's no clear visibility into project progress. VueWork solves this by providing a centralized, intuitive platform where teams can manage projects, assign tasks, track progress, and collaborate effectively in one place.
 
-## 👥 Target Users
+## Target Users
 
 - **Small teams** (3-10 members) in startups or small businesses
 - **Student project groups** working on collaborative assignments
 - **Freelance teams** coordinating remote work
 - **Department teams** in larger organizations needing lightweight project management
 
-## ✅ Success Criteria
+##  Success Criteria
 
 - Users can create a new project and add tasks in under 2 minutes
 - Team members can move tasks across status columns with a single drag
@@ -22,7 +22,7 @@ Small teams often struggle with fragmented task management across emails, spread
 - Mobile-responsive design works seamlessly on phones and tablets
 - Accessibility score of 90+ on Lighthouse audits
 
-## 📖 User Stories
+## User Stories
 
 1. **As a team member**, I want to **create a new project** so that **I can organize related tasks together**
 
@@ -44,7 +44,7 @@ Small teams often struggle with fragmented task management across emails, spread
 
 10. **As a user**, I want to **archive completed projects** so that **my project list stays clean and focused on active work**
 
-## 🚫 Non-Goals
+## Non-Goals
 
 This project will NOT include:
 
@@ -69,7 +69,7 @@ This project will NOT include:
 - **CI/CD**: GitHub Actions
 - **Deployment**: Netlify / Vercel
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
