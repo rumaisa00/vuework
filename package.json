@@ -12,5 +12,12 @@
  "devDependencies": {
   "vite": "^6.0.1",
   "@vitejs/plugin-vue": "^6.0.1"
+}{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "api": "json-server --watch server/db.json --port 3000",
+    "dev:all": "concurrently \"npm run api\" \"npm run dev\""
+  }
 }
 
