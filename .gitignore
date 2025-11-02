@@ -37,3 +37,5 @@ coverage
 # Build
 dist
 build
+# Local database (each developer will have their own)
+server/db.json
