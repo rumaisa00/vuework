@@ -6,7 +6,7 @@ export const useProjectsStore = defineStore('projects', () => {
   const projects = ref([
     {
       id: 1,
-      name: 'pit shop',
+      name: 'pet shop',
       description: 'Redesign company website with modern UI/UX',
       status: 'active',
       taskCount: 12,
