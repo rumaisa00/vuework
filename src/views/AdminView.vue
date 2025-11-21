@@ -1,108 +1,87 @@
 <template>
-  <div class="admin-view">
-    <h1>Admin Dashboard</h1>
-    
-    <div class="admin-placeholder">
-      <div class="icon">⚙️</div>
-      <h2>Admin Panel</h2>
-      <p>User management and role-based access control will be implemented in Milestone 4</p>
-      
-      <div class="feature-cards">
-        <div class="feature-card">
-          <h3>👥 User Management</h3>
-          <p>Add, edit, and remove team members</p>
-        </div>
-        <div class="feature-card">
-          <h3>🔐 Role Assignment</h3>
-          <p>Assign admin or member roles</p>
-        </div>
-        <div class="feature-card">
-          <h3>📊 System Stats</h3>
-          <p>View platform usage analytics</p>
-        </div>
-        <div class="feature-card">
-          <h3>🗂️ Project Archive</h3>
-          <p>Archive and restore projects</p>
-        </div>
-      </div>
-    </div>
+  <div class="admin-dashboard">
+    <h1>Pet Store Admin Dashboard</h1>
+
+```
+<!-- Stats Cards -->
+<div class="stats-cards">
+  <div class="stat-card">
+    <h3>🐶 Animals</h3>
+    <p>120</p>
+  </div>
+  <div class="stat-card">
+    <h3>👥 Customers</h3>
+    <p>85</p>
+  </div>
+  <div class="stat-card">
+    <h3>🛒 Orders</h3>
+    <p>230</p>
+  </div>
+  <div class="stat-card">
+    <h3>🧑‍💼 Employees</h3>
+    <p>15</p>
+  </div>
+</div>
+
+<!-- Admin Action Cards -->
+<div class="admin-actions">
+  <div class="action-card">
+    <h3>Manage Pets</h3>
+    <p>Add, edit, or remove pets</p>
+  </div>
+  <div class="action-card">
+    <h3>Manage Food</h3>
+    <p>Add, edit, or remove food items</p>
+  </div>
+  <div class="action-card">
+    <h3>Manage Supplies</h3>
+    <p>Update stock and details</p>
+  </div>
+  <div class="action-card">
+    <h3>Manage Orders</h3>
+    <p>View and update customer orders</p>
+  </div>
+  <div class="action-card">
+    <h3>Manage Employees</h3>
+    <p>Add, edit, or remove employees</p>
+  </div>
+</div>
+```
+
   </div>
 </template>
 
 <script setup>
-// Admin functionality will be added in Milestone 4
+// Future dynamic data fetching can be added here
 </script>
 
 <style scoped>
-.admin-view {
+.admin-dashboard {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
 }
 
 h1 {
+  text-align: center;
+  color: #27ae60;
   font-size: 2.5rem;
-  color: #2c3e50;
   margin-bottom: 2rem;
 }
 
-.admin-placeholder {
-  background: white;
-  padding: 3rem 2rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.icon {
-  font-size: 5rem;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-p {
-  color: #7f8c8d;
-  margin-bottom: 3rem;
-  font-size: 1.1rem;
-}
-
-.feature-cards {
+/* Stats Cards */
+.stats-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
+  margin-bottom: 3rem;
 }
 
-.feature-card {
-  background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
+.stat-card {
+  background: linear-gradient(135deg, #81ecec22 0%, #74b9ff22 100%);
   padding: 2rem;
   border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-card h3 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.feature-card p {
-  color: #7f8c8d;
-  margin-bottom: 0;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-  .feature-cards {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+  text-align: center;
+  transition: trans
