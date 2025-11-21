@@ -1,71 +1,77 @@
 <template>
   <div class="home-view">
     <section class="hero">
-      <h1>Welcome to VueWork</h1>
-      <p class="subtitle">Streamline your team's workflow with intuitive project management</p>
+      <h1>Welcome to Pet Store Management System</h1>
+      <p class="subtitle">
+        Manage pets, food, supplies, customers, and orders with a modern smart dashboard
+      </p>
+
       <div class="cta-buttons">
-        <RouterLink to="/projects" class="btn btn-primary">View Projects</RouterLink>
-        <RouterLink to="/calendar" class="btn btn-secondary">See Calendar</RouterLink>
+        <RouterLink to="/products" class="btn btn-primary">Browse Products</RouterLink>
+        <RouterLink to="/login" class="btn btn-secondary">Login</RouterLink>
+        <RouterLink to="/signup" class="btn btn-secondary">Sign Up</RouterLink>
       </div>
     </section>
 
     <section class="features">
-      <h2>Key Features</h2>
+      <h2>Features</h2>
       <div class="feature-grid">
         <div class="feature-card">
-          <div class="icon">📊</div>
-          <h3>Kanban Boards</h3>
-          <p>Visualize your workflow with intuitive drag-and-drop task boards</p>
+          <div class="icon">🐶</div>
+          <h3>Manage Pets</h3>
+          <p>Add, edit, and remove pets from the store inventory</p>
         </div>
 
         <div class="feature-card">
-          <div class="icon">📅</div>
-          <h3>Calendar View</h3>
-          <p>Track deadlines and milestones with an integrated calendar</p>
+          <div class="icon">🍖</div>
+          <h3>Food & Supplies</h3>
+          <p>Track stock, update quantities, and control product availability</p>
         </div>
 
         <div class="feature-card">
-          <div class="icon">👥</div>
-          <h3>Team Collaboration</h3>
-          <p>Assign tasks, comment, and keep everyone on the same page</p>
+          <div class="icon">🛒</div>
+          <h3>Customer Orders</h3>
+          <p>Customers can place orders and view detailed bills</p>
         </div>
 
         <div class="feature-card">
-          <div class="icon">📈</div>
-          <h3>Analytics</h3>
-          <p>Monitor progress and identify bottlenecks with visual insights</p>
+          <div class="icon">⭐</div>
+          <h3>Ratings</h3>
+          <p>View customer feedback and store ratings</p>
         </div>
       </div>
     </section>
 
     <section class="stats">
       <div class="stat-item">
-        <h3>{{ stats.projects }}</h3>
-        <p>Active Projects</p>
+        <h3>{{ stats.pets }}</h3>
+        <p>Pets Available</p>
       </div>
       <div class="stat-item">
-        <h3>{{ stats.tasks }}</h3>
-        <p>Tasks Completed</p>
+        <h3>{{ stats.foods }}</h3>
+        <p>Food Items</p>
       </div>
       <div class="stat-item">
-        <h3>{{ stats.users }}</h3>
-        <p>Team Members</p>
+        <h3>{{ stats.customers }}</h3>
+        <p>Customers</p>
+      </div>
+      <div class="stat-item">
+        <h3>{{ stats.orders }}</h3>
+        <p>Total Orders</p>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useProjectsStore } from '../stores/projects'
-
-const projectsStore = useProjectsStore()
+import { ref } from "vue";
 
 const stats = ref({
-  projects: 0,
-  tasks: 0,
-  users: 5
-})
+  pets: 12,
+  foods: 25,
+  customers: 8,
+  orders: 4,
+});
 </script>
 
 <style scoped>
@@ -77,7 +83,7 @@ const stats = ref({
 .hero {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
+  background: linear-gradient(135deg, #7dd3fc22 0%, #38bdf822 100%);
   border-radius: 12px;
   margin-bottom: 3rem;
 }
@@ -85,12 +91,12 @@ const stats = ref({
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: #0f172a;
 }
 
 .subtitle {
   font-size: 1.3rem;
-  color: #7f8c8d;
+  color: #334155;
   margin-bottom: 2rem;
 }
 
@@ -111,23 +117,23 @@ const stats = ref({
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
 }
 
 .btn-secondary {
   background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: #0ea5e9;
+  border: 2px solid #0ea5e9;
 }
 
 .btn-secondary:hover {
-  background: #667eea;
+  background: #0ea5e9;
   color: white;
 }
 
@@ -139,7 +145,7 @@ const stats = ref({
   text-align: center;
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #2c3e50;
+  color: #0f172a;
 }
 
 .feature-grid {
@@ -169,11 +175,11 @@ const stats = ref({
 
 .feature-card h3 {
   margin-bottom: 0.5rem;
-  color: #2c3e50;
+  color: #0f172a;
 }
 
 .feature-card p {
-  color: #7f8c8d;
+  color: #475569;
   line-height: 1.6;
 }
 
@@ -181,7 +187,7 @@ const stats = ref({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
   padding: 3rem 2rem;
   border-radius: 12px;
   color: white;
