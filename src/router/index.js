@@ -46,6 +46,17 @@ const router = createRouter({
         requiresAdmin: true
       }
     },
+
+    // ⭐ NEW ROUTE FOR PETS ⭐
+    {
+      path: '/pets',
+      name: 'pets',
+      component: () => import('../views/PetsView.vue'),
+      meta: {
+        title: 'Pets - SmartPetShop'
+      }
+    },
+
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
