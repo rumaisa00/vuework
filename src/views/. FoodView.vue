@@ -2,36 +2,33 @@
   <div class="manage-page">
     <h1>Manage Food Items</h1>
 
-```
-<button @click="addFood" class="btn-add">+ Add Food</button>
+    <button @click="addFood" class="btn-add">+ Add Food</button>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Quantity</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="food in foods" :key="food.id">
-      <td>{{ food.id }}</td>
-      <td>{{ food.name }}</td>
-      <td>{{ food.type }}</td>
-      <td>{{ food.quantity }}</td>
-      <td>{{ food.status }}</td>
-      <td>
-        <button @click="editFood(food)">Edit</button>
-        <button @click="removeFood(food.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-```
-
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="food in foods" :key="food.id">
+          <td>{{ food.id }}</td>
+          <td>{{ food.name }}</td>
+          <td>{{ food.type }}</td>
+          <td>{{ food.quantity }}</td>
+          <td>{{ food.status }}</td>
+          <td>
+            <button @click="editFood(food)">Edit</button>
+            <button @click="removeFood(food.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
