@@ -1,4 +1,3 @@
-<template>
   <div class="not-found">
     <div class="error-content">
       <h1 class="error-code">404</h1>
@@ -10,7 +9,7 @@
 </template>
 
 <script setup>
-// 404 page
+// 404 page placeholder
 </script>
 
 <style scoped>
@@ -18,21 +17,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  min-height: 70vh;
+  font-family: 'Poppins', sans-serif;
+  background: #dff9fb;
 }
 
 .error-content {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.error-content:hover {
+  transform: translateY(-5px);
 }
 
 .error-code {
   font-size: 8rem;
   font-weight: 900;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #27ae60;
   margin-bottom: 1rem;
 }
 
@@ -43,7 +48,7 @@ h2 {
 }
 
 p {
-  color: #7f8c8d;
+  color: #2d3436;
   font-size: 1.1rem;
   margin-bottom: 2rem;
 }
@@ -58,12 +63,12 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #81ecec 0%, #74b9ff 100%);
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(116, 185, 255, 0.4);
 }
 </style>
