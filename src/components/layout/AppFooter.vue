@@ -1,9 +1,9 @@
 <template>
   <footer class="app-footer">
     <div class="container">
-      <p>&copy; {{ currentYear }} VueWork. Built with Vue 3 for Web Applications Course.</p>
+      <p>&copy; {{ currentYear }} SmartPetShop. Built with Vue 3.</p>
       <div class="footer-links">
-        <a href="https://github.com/yourusername/vuework" target="_blank" rel="noopener">
+        <a href="https://github.com/yourusername/your-repo" target="_blank" rel="noopener">
           GitHub
         </a>
         <span>•</span>
@@ -50,7 +50,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .footer-links a:hover {
-  color: #667eea;
+  color: #27ae60;
 }
 
 @media (max-width: 768px) {
