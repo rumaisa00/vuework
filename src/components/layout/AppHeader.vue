@@ -1,25 +1,36 @@
 <template>
   <header class="app-header">
     <div class="container">
+      <!-- Logo -->
       <div class="logo">
         <RouterLink to="/">
-          <h1>📋 VueWork</h1>
+          <h1>🐾 SmartPetShop</h1>
         </RouterLink>
       </div>
 
-      <nav class="nav-menu" :class="{ active: isMenuOpen }">
-        <RouterLink to="/" @click="closeMenu">Home</RouterLink>
-        <RouterLink to="/projects" @click="closeMenu">Projects</RouterLink>
-        <RouterLink to="/calendar" @click="closeMenu">Calendar</RouterLink>
-        <RouterLink to="/admin" @click="closeMenu">Admin</RouterLink>
-      </nav>
+```
+  <!-- Navigation Menu -->
+  <nav class="nav-menu" :class="{ active: isMenuOpen }">
+    <RouterLink to="/" @click="closeMenu">Home</RouterLink>
+    <RouterLink to="/admin" @click="closeMenu">Admin</RouterLink>
+    <RouterLink to="/employee" @click="closeMenu">Employee</RouterLink>
+    <RouterLink to="/customer" @click="closeMenu">Customer</RouterLink>
+    <RouterLink to="/manage-pets" @click="closeMenu">Pets</RouterLink>
+    <RouterLink to="/manage-food" @click="closeMenu">Food</RouterLink>
+    <RouterLink to="/manage-supplies" @click="closeMenu">Supplies</RouterLink>
+    <RouterLink to="/orders" @click="closeMenu">Orders</RouterLink>
+    <RouterLink to="/cart" @click="closeMenu">Cart</RouterLink>
+  </nav>
 
-      <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+  <!-- Mobile Menu Toggle -->
+  <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+```
+
   </header>
 </template>
 
@@ -39,7 +50,7 @@ const closeMenu = () => {
 
 <style scoped>
 .app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -70,7 +81,7 @@ const closeMenu = () => {
 
 .nav-menu {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-menu a {
@@ -110,6 +121,7 @@ const closeMenu = () => {
   transition: all 0.3s ease;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
@@ -124,7 +136,7 @@ const closeMenu = () => {
     top: 100%;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
     flex-direction: column;
     gap: 0;
     padding: 1rem;
