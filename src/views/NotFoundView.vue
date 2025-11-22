@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-// 404 page placeholder
+import { RouterLink } from 'vue-router' // <-- add this import
 </script>
 
 <style scoped>
