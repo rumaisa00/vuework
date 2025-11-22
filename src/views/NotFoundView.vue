@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router' // Must be imported for template usage
 </script>
 
 <style scoped>
@@ -31,6 +31,7 @@ import { RouterLink } from 'vue-router'
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
+
 .error-content:hover {
   transform: translateY(-5px);
 }
