@@ -3,26 +3,23 @@
     <h1>Pet Store Admin Dashboard</h1>
     <h2>Welcome, {{ adminName }}</h2>
 
-```
-<!-- Stats Cards -->
-<div class="stats-cards">
-  <div class="stat-card" v-for="stat in stats" :key="stat.label">
-    <div class="stat-icon">{{ stat.icon }}</div>
-    <h3>{{ stat.label }}</h3>
-    <p>{{ stat.value }}</p>
-  </div>
-</div>
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+      <div class="stat-card" v-for="stat in stats" :key="stat.label">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <h3>{{ stat.label }}</h3>
+        <p>{{ stat.value }}</p>
+      </div>
+    </div>
 
-<!-- Admin Action Cards -->
-<div class="admin-actions">
-  <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
-    <div class="action-icon">{{ action.icon }}</div>
-    <h3>{{ action.title }}</h3>
-    <p>{{ action.description }}</p>
-  </router-link>
-</div>
-```
-
+    <!-- Admin Action Cards -->
+    <div class="admin-actions">
+      <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
+        <div class="action-icon">{{ action.icon }}</div>
+        <h3>{{ action.title }}</h3>
+        <p>{{ action.description }}</p>
+      </router-link>
+    </div>
   </div>
 </template>
 
