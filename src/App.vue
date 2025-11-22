@@ -3,16 +3,13 @@
     <!-- Header -->
     <AppHeader />
 
-```
-<!-- Main content where router views render -->
-<main class="main-content">
-  <RouterView />
-</main>
+    <!-- Main content where router views render -->
+    <main class="main-content">
+      <RouterView />
+    </main>
 
-<!-- Footer -->
-<AppFooter />
-```
-
+    <!-- Footer -->
+    <AppFooter />
   </div>
 </template>
 
