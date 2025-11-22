@@ -1,42 +1,54 @@
-<template>
   <div class="calendar-view">
-    <h1>Calendar</h1>
-    <div class="calendar-placeholder">
-      <div class="icon">📅</div>
-      <h2>Calendar View</h2>
-      <p>Interactive calendar with task scheduling coming in future milestones</p>
-      <div class="feature-list">
-        <div class="feature-item">✓ View all tasks by date</div>
-        <div class="feature-item">✓ Drag & drop to reschedule</div>
-        <div class="feature-item">✓ Filter by project or assignee</div>
-        <div class="feature-item">✓ Monthly and weekly views</div>
-      </div>
-    </div>
+    <h1>Pet Store Calendar</h1>
+
+```
+<div class="calendar-placeholder">
+  <div class="icon">📅</div>
+  <h2>Schedule & Tasks</h2>
+  <p>Track store activities, orders, and appointments efficiently.</p>
+
+  <div class="feature-list">
+    <div class="feature-item">🐾 View all tasks by date</div>
+    <div class="feature-item">🛒 Drag & drop to reschedule orders</div>
+    <div class="feature-item">👥 Filter by staff or project</div>
+    <div class="feature-item">📅 Monthly and weekly views</div>
+  </div>
+</div>
+```
+
   </div>
 </template>
 
 <script setup>
-// Calendar implementation will be added in later milestones
+// Future implementation for interactive calendar
 </script>
 
 <style scoped>
 .calendar-view {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: #27ae60;
+  text-align: center;
   margin-bottom: 2rem;
 }
 
 .calendar-placeholder {
-  background: white;
-  padding: 4rem 2rem;
+  background: #dff9fb;
+  padding: 3rem 2rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.calendar-placeholder:hover {
+  transform: translateY(-5px);
 }
 
 .icon {
@@ -47,10 +59,11 @@ h1 {
 h2 {
   color: #2c3e50;
   margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 p {
-  color: #7f8c8d;
+  color: #2d3436;
   margin-bottom: 2rem;
   font-size: 1.1rem;
 }
@@ -65,10 +78,15 @@ p {
 
 .feature-item {
   padding: 1rem;
-  background: #f8f9fa;
+  background: #81ecec22;
   border-radius: 8px;
   color: #2c3e50;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+.feature-item:hover {
+  background: #74b9ff22;
+  transform: translateY(-3px);
 }
 
 @media (max-width: 768px) {
