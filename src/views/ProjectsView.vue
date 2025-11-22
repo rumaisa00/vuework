@@ -1,4 +1,3 @@
-<template>
   <div class="projects-view">
     <div class="header">
       <h1>Projects</h1>
@@ -7,56 +6,59 @@
       </button>
     </div>
 
-    <div class="search-bar">
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="Search projects..."
-        class="search-input"
-      />
-    </div>
+```
+<div class="search-bar">
+  <input
+    v-model="searchQuery"
+    type="text"
+    placeholder="Search projects..."
+    class="search-input"
+  />
+</div>
 
-    <div v-if="loading" class="loading">
-      <div class="spinner"></div>
-      <p>Loading projects...</p>
-    </div>
+<div v-if="loading" class="loading">
+  <div class="spinner"></div>
+  <p>Loading projects...</p>
+</div>
 
-    <div v-else-if="filteredProjects.length === 0" class="empty-state">
-      <div class="icon">📁</div>
-      <h2>No projects yet</h2>
-      <p>Create your first project to get started</p>
-      <button class="btn btn-primary" @click="showCreateModal = true">
-        + Create Project
-      </button>
-    </div>
+<div v-else-if="filteredProjects.length === 0" class="empty-state">
+  <div class="icon">🐾</div>
+  <h2>No projects yet</h2>
+  <p>Create your first project to get started</p>
+  <button class="btn btn-primary" @click="showCreateModal = true">
+    + Create Project
+  </button>
+</div>
 
-    <div v-else class="projects-grid">
-      <div
-        v-for="project in filteredProjects"
-        :key="project.id"
-        class="project-card"
-        @click="goToBoard(project.id)"
-      >
-        <div class="project-header">
-          <h3>{{ project.name }}</h3>
-          <span class="status-badge" :class="project.status">{{ project.status }}</span>
-        </div>
-        <p class="description">{{ project.description }}</p>
-        <div class="project-footer">
-          <span class="task-count">{{ project.taskCount }} tasks</span>
-          <span class="members">👥 {{ project.memberCount }}</span>
-        </div>
-      </div>
+<div v-else class="projects-grid">
+  <div
+    v-for="project in filteredProjects"
+    :key="project.id"
+    class="project-card"
+    @click="goToBoard(project.id)"
+  >
+    <div class="project-header">
+      <h3>{{ project.name }}</h3>
+      <span class="status-badge" :class="project.status">{{ project.status }}</span>
     </div>
+    <p class="description">{{ project.description }}</p>
+    <div class="project-footer">
+      <span class="task-count">{{ project.taskCount }} tasks</span>
+      <span class="members">👥 {{ project.memberCount }}</span>
+    </div>
+  </div>
+</div>
 
-    <!-- Create Project Modal (placeholder) -->
-    <div v-if="showCreateModal" class="modal-overlay" @click="showCreateModal = false">
-      <div class="modal" @click.stop>
-        <h2>Create New Project</h2>
-        <p>Project creation form coming in Milestone 3</p>
-        <button class="btn btn-secondary" @click="showCreateModal = false">Close</button>
-      </div>
-    </div>
+<!-- Create Project Modal -->
+<div v-if="showCreateModal" class="modal-overlay" @click="showCreateModal = false">
+  <div class="modal" @click.stop>
+    <h2>Create New Project</h2>
+    <p>Project creation form coming in Milestone 3</p>
+    <button class="btn btn-secondary" @click="showCreateModal = false">Close</button>
+  </div>
+</div>
+```
+
   </div>
 </template>
 
@@ -90,6 +92,8 @@ const goToBoard = projectId => {
 .projects-view {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .header {
@@ -101,7 +105,7 @@ const goToBoard = projectId => {
 
 .header h1 {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: #27ae60;
 }
 
 .btn {
@@ -114,19 +118,19 @@ const goToBoard = projectId => {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #81ecec 0%, #74b9ff 100%);
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(116, 185, 255, 0.4);
 }
 
 .btn-secondary {
   background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: #27ae60;
+  border: 2px solid #27ae60;
 }
 
 .search-bar {
@@ -144,7 +148,7 @@ const goToBoard = projectId => {
 
 .search-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #27ae60;
 }
 
 .loading {
@@ -156,7 +160,7 @@ const goToBoard = projectId => {
   width: 50px;
   height: 50px;
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  border-top: 4px solid #27ae60;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto 1rem;
@@ -171,7 +175,7 @@ const goToBoard = projectId => {
 .empty-state {
   text-align: center;
   padding: 4rem;
-  background: white;
+  background: #dff9fb;
   border-radius: 12px;
 }
 
@@ -186,7 +190,7 @@ const goToBoard = projectId => {
 }
 
 .empty-state p {
-  color: #7f8c8d;
+  color: #2d3436;
   margin-bottom: 2rem;
 }
 
