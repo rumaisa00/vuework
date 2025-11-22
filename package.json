@@ -1,6 +1,7 @@
 {
   "name": "vuework",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,7 +10,9 @@
     "dev:all": "concurrently \"npm run api\" \"npm run dev\""
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "pinia": "^2.1.2",
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "vite": "^6.0.1",
