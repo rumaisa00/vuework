@@ -18,7 +18,7 @@ const password = ref('')
 
 const login = () => {
   alert(`Logging in as ${username.value}`)
-  // Replace with real authentication logic later
+  // TODO: Replace with real authentication logic
 }
 </script>
 
