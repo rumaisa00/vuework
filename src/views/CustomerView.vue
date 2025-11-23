@@ -27,7 +27,6 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useProductsStore } from "../stores/cart.js"; 
 import { useCartStore } from "../stores/cart.js";
 import AppHeader from '../components/layout/AppHeader.vue';
 
