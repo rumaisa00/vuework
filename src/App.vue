@@ -1,14 +1,14 @@
 <template>
-  <div id="app" class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
-    <!-- Header -->
+  <div id="app" class="app-wrapper">
+    <!-- HEADER -->
     <AppHeader />
 
-    <!-- Main content -->
-    <main class="flex-1 max-w-7xl mx-auto px-6 py-8 w-full transition-all duration-300">
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
       <RouterView />
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <AppFooter />
   </div>
 </template>
@@ -19,7 +19,9 @@ import AppFooter from './components/layout/AppFooter.vue'
 </script>
 
 <style>
-/* Global reset & font */
+/* -------------------------
+   GLOBAL STYLES
+------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -27,42 +29,51 @@ import AppFooter from './components/layout/AppFooter.vue'
 }
 
 body {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-  background-color: #f5f7fa;
-  color: #2c3e50;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  color: #1e293b;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Smooth transitions for all layout changes */
-#app {
+/* -------------------------
+   WRAPPER
+------------------------- */
+.app-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Main content */
-main {
+/* -------------------------
+   MAIN CONTENT
+------------------------- */
+.main-content {
   flex: 1;
-  transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+
+  /* glass effect container feel */
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
-/* Responsive padding */
 @media (max-width: 1024px) {
-  main {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+  .main-content {
+    padding: 24px 20px;
   }
 }
 
 @media (max-width: 768px) {
-  main {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+  .main-content {
+    padding: 20px 16px;
   }
+}
+
+/* Smooth transitions */
+main, header, footer {
+  transition: all 0.25s ease-in-out;
 }
 </style>
