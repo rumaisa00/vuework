@@ -23,7 +23,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useProductsStore } from '../view/productView.vue'
+import { useProductsStore } from '../views/productView.vue'
 import { useCartStore } from '../stores/cart.js'
 
 const q = ref('')
