@@ -1,37 +1,32 @@
 <template>
-  <div class="manage-page">
-    <h1>Manage Pets</h1>
+  <div class="manage-page max-w-6xl mx-auto px-6 py-12">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Manage Pets</h1>
+      <button @click="addPet" class="btn-primary">+ Add New Pet</button>
+    </div>
 
-```
-<button @click="addPet" class="btn-add">+ Add New Pet</button>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Age</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="pet in pets" :key="pet.id">
-      <td>{{ pet.id }}</td>
-      <td>{{ pet.name }}</td>
-      <td>{{ pet.type }}</td>
-      <td>{{ pet.age }}</td>
-      <td>{{ pet.status }}</td>
-      <td>
-        <button @click="editPet(pet)">Edit</button>
-        <button @click="removePet(pet.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-```
-
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div v-for="pet in pets" :key="pet.id" class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+        <h2 class="text-xl font-semibold mb-2">{{ pet.name }}</h2>
+        <p class="text-gray-600 mb-1"><strong>Type:</strong> {{ pet.type }}</p>
+        <p class="text-gray-600 mb-1"><strong>Age:</strong> {{ pet.age }}</p>
+        <p class="mb-4">
+          <span
+            :class="{
+              'badge-available': pet.status === 'Available',
+              'badge-sold': pet.status === 'Sold'
+            }"
+            class="px-3 py-1 rounded-full text-white text-sm"
+          >
+            {{ pet.status }}
+          </span>
+        </p>
+        <div class="flex gap-2">
+          <button @click="editPet(pet)" class="btn-secondary w-full">Edit</button>
+          <button @click="removePet(pet.id)" class="btn-danger w-full">Delete</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,13 +44,19 @@ const removePet = (id) => alert(`Remove pet ID ${id}`)
 </script>
 
 <style scoped>
-.manage-page { max-width: 1000px; margin: 2rem auto; padding: 1rem; font-family: 'Poppins', sans-serif; }
-h1 { color: #27ae60; margin-bottom: 1rem; }
-.btn-add { background: #27ae60; color: white; padding: 0.5rem 1rem; border-radius: 8px; border: none; margin-bottom: 1rem; cursor: pointer; }
-.btn-add:hover { background: #2ecc71; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 0.8rem; border: 1px solid #ddd; text-align: center; }
-th { background: #dff9fb; }
-button { padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer; margin: 0 0.2rem; }
-button:hover { opacity: 0.8; }
+.btn-primary {
+  @apply px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition;
+}
+.btn-secondary {
+  @apply px-4 py-2 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition;
+}
+.btn-danger {
+  @apply px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition;
+}
+.badge-available {
+  @apply bg-green-500;
+}
+.badge-sold {
+  @apply bg-red-500;
+}
 </style>
