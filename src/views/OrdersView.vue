@@ -23,7 +23,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useUserStore } from '../stores/user.js'  <!-- Correct path with extension -->
+import { useUserStore } from '../stores/user.js' 
 
 const user = useUserStore()
 const orders = computed(() => user.user?.orders || [])
