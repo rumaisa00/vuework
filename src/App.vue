@@ -1,18 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
     <!-- Header -->
     <AppHeader />
 
-```
-<!-- Main content where router views render -->
-<main class="main-content">
-  <RouterView />
-</main>
+    <!-- Main content -->
+    <main class="flex-1 max-w-7xl mx-auto px-6 py-8 w-full transition-all duration-300">
+      <RouterView />
+    </main>
 
-<!-- Footer -->
-<AppFooter />
-```
-
+    <!-- Footer -->
+    <AppFooter />
   </div>
 </template>
 
@@ -22,7 +19,7 @@ import AppFooter from './components/layout/AppFooter.vue'
 </script>
 
 <style>
-/* Reset and global styles */
+/* Global reset & font */
 * {
   margin: 0;
   padding: 0;
@@ -37,33 +34,35 @@ body {
   line-height: 1.6;
 }
 
-/* App container */
+/* Smooth transitions for all layout changes */
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Main content styling */
-.main-content {
+/* Main content */
+main {
   flex: 1;
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Responsive adjustments */
+/* Responsive padding */
 @media (max-width: 1024px) {
-  .main-content {
-    padding: 1.5rem;
+  main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .main-content {
-    padding: 1rem;
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 </style>
