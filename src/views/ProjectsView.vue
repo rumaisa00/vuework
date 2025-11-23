@@ -83,7 +83,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useProjectsStore } from '../stores/projects'
+
 
 const router = useRouter()
 const projectsStore = useProjectsStore()
