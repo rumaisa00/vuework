@@ -1,62 +1,65 @@
-/* ---------------------------------------------------
-   GLOBAL RESET & BASE THEME
---------------------------------------------------- */
-:root {
-  --color-bg: #f5f7fa;
-  --color-text: #1e293b;
-  --color-primary: #10b981;
-  --color-primary-dark: #059669;
-  --color-accent: #3b82f6;
-
-  --radius: 12px;
-  --shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-* {
+/* Global styles for SmartPetShop */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
-html, body {
-  font-family: 'Inter', 'Poppins', sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
+/* Links styling */
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Remove old Vite layout */
-#app {
-  max-width: 100%;
-  padding: 0;
-  text-align: left;
-}
-
-/* Buttons (global look) */
+/* Buttons */
 button {
-  background: var(--color-primary);
-  color: white;
-  border: none;
-  padding: 0.6rem 1.4rem;
-  font-size: 1rem;
-  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.25s ease;
+  border: none;
+  border-radius: 6px;
+  transition: 0.2s;
 }
 
-button:hover {
-  background: var(--color-primary-dark);
-}
-
-/* Card utility */
+/* General card style */
 .card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 1rem;
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* Form inputs */
+input {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+/* Grid layout for product pages */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  gap: 1.5rem;
+}
+
+/* Navigation buttons */
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nav-buttons .btn {
+  padding: 0.6rem 1rem;
+  background: #2196f3;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.nav-buttons .btn:hover {
+  background: #1976d2;
 }
