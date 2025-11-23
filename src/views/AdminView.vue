@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { useProductsStore } from '../stores/cart.js'
+import { useProductsStore } from '../stores/productStore.js'
 import { useUserStore } from '../stores/user.js'
 
 const products = useProductsStore()
