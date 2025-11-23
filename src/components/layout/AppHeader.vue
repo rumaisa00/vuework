@@ -1,68 +1,54 @@
 <template>
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-      <RouterLink to="/" class="flex items-center gap-2">
-        <span class="text-3xl">🐾</span>
-        <h1 class="text-xl font-bold text-gray-800">SmartPetShop</h1>
-      </RouterLink>
-
-      <nav class="hidden md:flex gap-4">
-        <RouterLink to="/" class="nav-link">Home</RouterLink>
-        <RouterLink v-if="userRole==='admin'" to="/admin" class="nav-link">Admin</RouterLink>
-        <RouterLink v-if="userRole==='employee'" to="/employee" class="nav-link">Employee</RouterLink>
-        <RouterLink v-if="userRole==='customer'" to="/customer" class="nav-link">Customer</RouterLink>
-
-        <RouterLink v-if="userRole" to="/orders" class="nav-link">Orders</RouterLink>
-        <RouterLink v-if="!userRole" to="/login" class="nav-link">Login</RouterLink>
-        <RouterLink v-if="!userRole" to="/signup" class="nav-link">Signup</RouterLink>
-      </nav>
-
-      <button class="md:hidden text-2xl" @click="toggleMenu">
-        {{ menuOpen ? '✕' : '☰' }}
-      </button>
-    </div>
-
-    <nav
-      v-if="menuOpen"
-      class="md:hidden bg-white shadow-md flex flex-col px-6 py-4 space-y-2"
-    >
-      <RouterLink to="/" class="nav-link" @click="closeMenu">Home</RouterLink>
-      <RouterLink v-if="userRole==='admin'" to="/admin" class="nav-link" @click="closeMenu">Admin</RouterLink>
-      <RouterLink v-if="userRole==='employee'" to="/employee" class="nav-link" @click="closeMenu">Employee</RouterLink>
-      <RouterLink v-if="userRole==='customer'" to="/customer" class="nav-link" @click="closeMenu">Customer</RouterLink>
-
-      <RouterLink v-if="userRole" to="/orders" class="nav-link" @click="closeMenu">Orders</RouterLink>
-      <RouterLink v-if="!userRole" to="/login" class="nav-link" @click="closeMenu">Login</RouterLink>
-      <RouterLink v-if="!userRole" to="/signup" class="nav-link" @click="closeMenu">Signup</RouterLink>
+  <header class="header">
+    <div class="logo">SmartPetShop</div>
+    <nav>
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link v-if="!user" to="/signup" class="nav-link">Sign Up</router-link>
+      <router-link v-if="user?.role === 'customer'" to="/customer" class="nav-link">Dashboard</router-link>
+      <router-link v-if="user?.role === 'admin'" to="/admin" class="nav-link">Admin</router-link>
+      <router-link v-if="user" @click.prevent="logout" class="nav-link">Logout</router-link>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { useUserStore } from '../store/userStore'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-const menuOpen = ref(false)
-const toggleMenu = () => menuOpen.value = !menuOpen.value
-const closeMenu = () => menuOpen.value = false
+const store = useUserStore()
+const router = useRouter()
 
-const userRole = computed(() => localStorage.getItem('userRole') || null)
+const user = computed(() => store.user)
+
+const logout = () => {
+  store.logout()
+  router.push('/')
+}
 </script>
 
 <style scoped>
-.nav-link {
-  padding: 0.5rem 1rem;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2196f3;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav .nav-link {
+  margin-left: 1rem;
+  color: white;
   font-weight: 500;
-  border-radius: 8px;
-  transition: 0.25s;
-  color: #1e293b;
 }
-.nav-link:hover {
-  background: #f0fdf4;
-  color: #059669;
-}
-.router-link-active {
-  background: #dcfce7;
-  color: #059669;
-  font-weight: 600;
+
+nav .nav-link:hover {
+  text-decoration: underline;
 }
 </style>
