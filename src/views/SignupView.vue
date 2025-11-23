@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useUserStore } from "../stores/user.js";
+import { useUserStore } from "../stores/user.js"; // Add .js extension
 import { useRouter } from "vue-router";
 
 const router = useRouter();
