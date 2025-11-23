@@ -1,35 +1,33 @@
 <template>
-  <div class="bill-page">
-    <h2>Bill</h2>
-    <p>Total Amount: ${{ total }}</p>
-    <p>Thank you for shopping at SmartPetShop!</p>
-    <button @click="goHome">Back to Shop</button>
+  <div class="card">
+    <h2>Bill / Receipt</h2>
+    <div v-if="!order">
+      <div class="empty">No bill data found.</div>
+    </div>
+    <div v-else>
+      <div class="kv">Order #: {{ order.id }}</div>
+      <div class="kv">Date: {{ new Date(order.date).toLocaleString() }}</div>
+      <div style="margin-top:1rem">
+        <div v-for="it in order.items" :key="it.productId" class="kv">{{ it.qty }} × {{ it.name }} — ${{ it.price }}</div>
+      </div>
+      <div style="margin-top:1rem;text-align:right"><strong>Total: ${{ order.total }}</strong></div>
+      <div style="margin-top:1rem">
+        <button class="btn btn-primary" @click="goHome">Back to shop</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '../stores/user'
 
 const route = useRoute()
 const router = useRouter()
-const total = route.params.total || 0
+const user = useUserStore()
 
-const goHome = () => router.push('/customer')
+const orderId = Number(route.query.orderId)
+const order = user.user?.orders?.find(o => o.id === orderId) || null
+
+function goHome() { router.push('/pets') }
 </script>
-
-<style scoped>
-.bill-page {
-  padding: 2rem;
-  text-align: center;
-}
-button {
-  margin-top: 1rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  background: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover { background: #45a049; }
-</style>
