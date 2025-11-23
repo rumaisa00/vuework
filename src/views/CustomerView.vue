@@ -29,7 +29,8 @@
 import { ref, computed } from "vue";
 import { useProductStore } from "../views/productView.vue";
 import { useCartStore } from "../stores/cart.js";
-import Header from "../components/layout/AppHeader.vue";
+import AppHeader from '../components/layout/AppHeader.vue'
+
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
