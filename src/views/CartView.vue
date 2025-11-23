@@ -1,62 +1,47 @@
 <template>
-  <div class="cart-page">
+  <div class="card">
     <h2>Your Cart</h2>
-    <div v-if="cartItems.length === 0">Your cart is empty.</div>
-    <div v-else class="cart-items">
-      <div v-for="item in cartItems" :key="item.id" class="cart-item">
-        <p>{{ item.name }} - ${{ item.price }} x {{ item.quantity }}</p>
-        <button @click="removeItem(item.id)">Remove</button>
+
+    <div v-if="items.length === 0" class="empty">Your cart is empty — add something from Pets/Food/Supplies.</div>
+
+    <div v-else>
+      <div v-for="it in items" :key="it.id" class="card" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+        <div>
+          <strong>{{ it.name }}</strong>
+          <div class="kv">qty: {{ it.qty }} · ${{ it.price }} each</div>
+        </div>
+        <div>
+          <button class="btn small" @click="remove(it.id)">Remove</button>
+        </div>
       </div>
-      <h3>Total: ${{ totalPrice }}</h3>
-      <button @click="checkout">Checkout</button>
+
+      <div style="margin-top:1rem;text-align:right">
+        <div class="kv">Total: ${{ total }}</div>
+        <button class="btn btn-primary" style="margin-top:0.8rem" @click="onCheckout">Checkout</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { useCartStore } from '../stores/cart'
 import { useRouter } from 'vue-router'
 
+const cart = useCartStore()
 const router = useRouter()
-const cartItems = ref([
-  // Example item
-  // { id: 1, name: 'Dog Food', price: 20, quantity: 2 }
-])
 
-const removeItem = (id) => {
-  cartItems.value = cartItems.value.filter(item => item.id !== id)
-}
+const items = cart.items
+const total = cart.total
 
-const totalPrice = computed(() =>
-  cartItems.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
-)
+function remove(id) { cart.removeItem(id) }
 
-const checkout = () => {
-  if(cartItems.value.length === 0) return alert('Cart is empty!')
-  alert('Checkout successful!')
-  router.push({ name: 'Bill', params: { total: totalPrice.value } })
+function onCheckout() {
+  try {
+    const order = cart.checkout()
+    // navigate to Bill with order id and total as query
+    router.push({ name: 'Bill', query: { orderId: order.id, total: order.total } })
+  } catch (err) {
+    alert(err.message || 'Checkout failed')
+  }
 }
 </script>
-
-<style scoped>
-.cart-page {
-  padding: 2rem;
-}
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-button {
-  background: #ff9800;
-  color: white;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-button:hover { background: #f57c00; }
-</style>
