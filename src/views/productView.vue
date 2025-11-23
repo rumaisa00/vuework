@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useProductsStore } from '../stores/products'
+import { useProductsStore } from '../stores/cart.js'
 
 const productsStore = useProductsStore()
 const allProducts = productsStore.allProducts
