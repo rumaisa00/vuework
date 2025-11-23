@@ -27,8 +27,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useProductStore } from "../stores/productStore";
-import { useCartStore } from "../stores/cartStore";
+import { useProductStore } from "../views/productView.vue";
+import { useCartStore } from "../stores/cart.js";
 import HeaderBar from "../components/HeaderBar.vue";
 
 const productStore = useProductStore();
