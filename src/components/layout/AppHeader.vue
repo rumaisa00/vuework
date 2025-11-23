@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useUserStore } from '../store/user.js'
+import { useUserStore } from 'src/store/user.js'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
