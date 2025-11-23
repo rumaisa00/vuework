@@ -1,3 +1,4 @@
+<template>
   <div class="not-found">
     <div class="error-content">
       <h1 class="error-code">404</h1>
@@ -10,6 +11,7 @@
 
 <script setup>
 // 404 page placeholder
+import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
