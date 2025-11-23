@@ -1,31 +1,24 @@
-import { defineStore } from 'pinia';
-import axios from '../api/api';
-import { ref } from 'vue';
-import { useApiState } from '../composables/useApiState';
-
-interface Pet {
-  id: number;
-  name: string;
-  type: string;
-  age: number;
-  price: number;
-  status: string; // available / sold
-}
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import axios from '../api/api'
 
 export const usePetsStore = defineStore('pets', () => {
-  const pets = ref<Pet[]>([]);
-  const { loading, error, start, success, fail } = useApiState();
+  const pets = ref([])
+  const loading = ref(false)
+  const error = ref(null)
 
   async function fetchPets() {
-    start();
+    loading.value = true
+    error.value = null
     try {
-      const res = await axios.get<Pet[]>('/pets');
-      pets.value = res.data;
-      success();
+      const res = await axios.get('/pets')
+      pets.value = res.data
     } catch (err) {
-      fail(err);
+      error.value = err
+    } finally {
+      loading.value = false
     }
   }
 
-  return { pets, loading, error, fetchPets };
-});
+  return { pets, loading, error, fetchPets }
+})
