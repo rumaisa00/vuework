@@ -23,7 +23,6 @@ const allOrders = computed(() => {
       u.orders.forEach(o => arr.push({ ...o, userId: u.id }))
     }
   })
-  // sort by date desc
   return arr.sort((a,b)=> new Date(b.date) - new Date(a.date))
 })
 const ordersCount = computed(() => allOrders.value.length)
@@ -42,7 +41,9 @@ const form = reactive({
   image: ''
 })
 
-const modalTargetLabel = computed(() => modalTarget.value === 'pet' ? 'Pet' : modalTarget.value === 'food' ? 'Food' : 'Supply')
+const modalTargetLabel = computed(() =>
+  modalTarget.value === 'pet' ? 'Pet' : modalTarget.value === 'food' ? 'Food' : 'Supply'
+)
 
 // helper: open add modal
 function openAdd(target) {
@@ -125,12 +126,12 @@ function toggleRole(u){
   u.role = u.role === 'admin' ? 'customer' : 'admin'
   usersStoreUpdate(u)
 }
+
 function deleteUser(id){
   if(!confirm('Delete user?')) return
   usersStoreDelete(id)
 }
 
-// helper wrappers that call store functions if exist, else mutate local arrays
 function usersStoreUpdate(u){
   if(usersStore.updateUser) usersStore.updateUser(u.id, { role: u.role })
   else {
@@ -138,6 +139,7 @@ function usersStoreUpdate(u){
     if(idx !== -1) users.value[idx] = { ...users.value[idx], role: u.role }
   }
 }
+
 function usersStoreDelete(id){
   if(usersStore.deleteUser) usersStore.deleteUser(id)
   else {
@@ -153,11 +155,13 @@ function findUserName(userId){
   const u = users.value.find(x=>x.id === userId)
   return u ? u.name : 'Unknown'
 }
+
 function nextStatus(current){
   if(current === 'pending') return 'complete'
   if(current === 'complete') return 'pending'
   return 'complete'
 }
+
 function changeOrderStatus(order, status){
   if(!confirm(`Change status to ${status}?`)) return
   const u = users.value.find(x=>x.id === order.userId)
