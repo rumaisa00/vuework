@@ -1,56 +1,66 @@
 <template>
   <div class="signup-page">
-    <h1>Customer Signup</h1>
-    <form @submit.prevent="signup">
-      <input type="text" v-model="name" placeholder="Full Name" required />
-      <input type="email" v-model="email" placeholder="Email" required />
-      <input type="password" v-model="password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <router-link to="/login">Login</router-link></p>
+    <div class="signup-form">
+      <h1>Sign Up</h1>
+      <input v-model="username" placeholder="Username" />
+      <input v-model="password" type="password" placeholder="Password" />
+      <button @click="handleSignup">Sign Up</button>
+      <p>Already have an account? <router-link to="/">Login</router-link></p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const name = ref('')
-const email = ref('')
+const router = useRouter()
+const username = ref('')
 const password = ref('')
 
-const signup = () => {
-  alert(`Signing up ${name.value}`)
-  // TODO: Replace with real signup logic
+const handleSignup = () => {
+  if(username.value && password.value){
+    alert('Account created! Please login.')
+    router.push('/')
+  } else {
+    alert('Fill in all fields')
+  }
 }
 </script>
 
 <style scoped>
+/* Reuse login styling for simplicity */
 .signup-page {
-  max-width: 400px;
-  margin: 4rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f2f2f2;
+}
+.signup-form {
+  background: white;
   padding: 2rem;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  background: #dff9fb;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
 }
 input {
   width: 100%;
   padding: 0.8rem;
   margin: 0.5rem 0;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid #ccc;
 }
 button {
   width: 100%;
   padding: 0.8rem;
-  background: #27ae60;
-  color: #fff;
+  background: #2196f3;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
-button:hover { background: #2ecc71; }
+button:hover {
+  background: #1976d2;
+}
 </style>
