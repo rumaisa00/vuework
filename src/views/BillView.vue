@@ -1,26 +1,28 @@
 <template>
-  <div class="bill-page">
-    <h1>Bill</h1>
-    <table>
+  <div class="bill-page max-w-5xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Bill</h1>
+
+    <table class="w-full table-auto border-collapse mb-6">
       <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Total</th>
+        <tr class="bg-blue-100">
+          <th class="border px-4 py-2">Item</th>
+          <th class="border px-4 py-2">Quantity</th>
+          <th class="border px-4 py-2">Price</th>
+          <th class="border px-4 py-2">Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in billItems" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.price }}$</td>
-          <td>{{ item.quantity * item.price }}$</td>
+        <tr v-for="item in billItems" :key="item.id" class="hover:bg-gray-50">
+          <td class="border px-4 py-2">{{ item.name }}</td>
+          <td class="border px-4 py-2">{{ item.quantity }}</td>
+          <td class="border px-4 py-2">${{ item.price }}</td>
+          <td class="border px-4 py-2">${{ item.quantity * item.price }}</td>
         </tr>
       </tbody>
     </table>
-    <h3>Total Amount: {{ total }}$</h3>
-    <button @click="printBill" class="btn-print">Print PDF</button>
+
+    <div class="text-right font-bold text-xl mb-4">Total Amount: ${{ total }}</div>
+    <button @click="printBill" class="btn-primary float-right">Print PDF</button>
   </div>
 </template>
 
@@ -38,12 +40,7 @@ const printBill = () => alert('Print PDF functionality coming soon')
 </script>
 
 <style scoped>
-.bill-page { max-width: 1000px; margin: 2rem auto; padding: 1rem; font-family: 'Poppins', sans-serif; }
-h1 { color: #27ae60; text-align: center; margin-bottom: 1rem; }
-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-th, td { padding: 0.8rem; border: 1px solid #ddd; text-align: center; }
-th { background: #dff9fb; }
-.btn-print { background: #27ae60; color: white; padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; }
-.btn-print:hover { background: #2ecc71; }
-h3 { text-align: right; }
+.btn-primary {
+  @apply px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition;
+}
 </style>
