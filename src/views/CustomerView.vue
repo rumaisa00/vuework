@@ -1,36 +1,44 @@
 <template>
-  <div class="px-4 py-10 max-w-7xl mx-auto">
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-green-600">Customer Dashboard</h1>
-      <p class="text-gray-600 text-lg mt-2">Welcome, {{ customerName }}</p>
+  <div>
+    <Header />
+    <div class="customer-dashboard">
+      <SearchBar v-model="searchQuery" />
+      <div class="products-grid">
+        <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"/>
+      </div>
     </div>
-
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Actions</h2>
-
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      <router-link
-        v-for="action in actions"
-        :key="action.title"
-        :to="action.link"
-        class="block bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1 border border-gray-100"
-      >
-        <div class="text-4xl mb-3">{{ action.icon }}</div>
-        <h3 class="text-lg font-semibold text-gray-700 mb-1">{{ action.title }}</h3>
-        <p class="text-sm text-gray-500">{{ action.description }}</p>
-      </router-link>
-    </div>
+    <Footer />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from 'vue'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+import ProductCard from '../components/ProductCard.vue'
+import SearchBar from '../components/SearchBar.vue'
 
-const customerName = ref("Customer");
+const searchQuery = ref('')
+const products = ref([
+  { id: 1, name: 'Dog Food', price: 20, type: 'food' },
+  { id: 2, name: 'Cat Toy', price: 5, type: 'toy' },
+  { id: 3, name: 'Fish Tank', price: 50, type: 'aquatic' },
+])
 
-const actions = ref([
-  { title: "View Menu", description: "Check pets, food, and supplies", link: "/menu", icon: "🛍️" },
-  { title: "My Orders", description: "View order status and bills", link: "/my-orders", icon: "🛒" },
-  { title: "Cart", description: "Add or edit items", link: "/cart", icon: "🛒" },
-  { title: "Rate Services", description: "Rate our shop", link: "/rate", icon: "⭐" },
-]);
+const filteredProducts = computed(() => {
+  if (!searchQuery.value) return products.value
+  return products.value.filter(p => p.name.toLowerCase().includes(searchQuery.value.toLowerCase()))
+})
 </script>
+
+<style scoped>
+.customer-dashboard {
+  padding: 2rem;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+</style>
