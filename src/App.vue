@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-    <!-- The router-view displays the current page -->
-    <router-view />
+    <Header />
+    <main class="container">
+      <router-view />
+    </main>
+    <Footer />
   </div>
 </template>
 
 <script setup>
-// Nothing extra needed here; router handles navigation
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <style>
-/* Global styling for the app */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f7f7f7;
-}
-
-#app {
-  min-height: 100vh;
+/* small page-level spacing */
+.container {
+  padding: 1.5rem;
+  min-height: calc(100vh - 140px);
+  max-width: 1100px;
+  margin: 0 auto;
 }
 </style>
