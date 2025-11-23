@@ -20,7 +20,7 @@ const password = ref('')
 
 const signup = () => {
   alert(`Signing up ${name.value}`)
-  // Replace with real signup logic later
+  // TODO: Replace with real signup logic
 }
 </script>
 
