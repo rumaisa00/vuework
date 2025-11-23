@@ -1,55 +1,53 @@
 <template>
-  <div class="employee-dashboard">
-    <h1>Employee Dashboard</h1>
-    <h2>Welcome, {{ employeeName }}</h2>
+  <div class="px-4 py-10 max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-green-600">Employee Dashboard</h1>
+      <p class="text-gray-600 text-lg mt-2">Welcome, {{ employeeName }}</p>
+    </div>
 
-    <!-- Stats Cards -->
-    <div class="stats-cards">
-      <div class="stat-card" v-for="stat in stats" :key="stat.label">
-        <div class="stat-icon">{{ stat.icon }}</div>
-        <h3>{{ stat.label }}</h3>
-        <p>{{ stat.value }}</p>
+    <!-- Stats -->
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+      <div
+        v-for="stat in stats"
+        :key="stat.label"
+        class="bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1"
+      >
+        <div class="text-4xl mb-3">{{ stat.icon }}</div>
+        <h3 class="text-lg font-semibold text-gray-700">{{ stat.label }}</h3>
+        <p class="text-2xl font-bold text-green-600">{{ stat.value }}</p>
       </div>
     </div>
 
-    <!-- Employee Actions -->
-    <div class="employee-actions">
-      <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
-        <div class="action-icon">{{ action.icon }}</div>
-        <h3>{{ action.title }}</h3>
-        <p>{{ action.description }}</p>
+    <!-- Actions -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Employee Tools</h2>
+
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2">
+      <router-link
+        v-for="action in actions"
+        :key="action.title"
+        :to="action.link"
+        class="block bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1 border border-gray-100"
+      >
+        <div class="text-4xl mb-3">{{ action.icon }}</div>
+        <h3 class="text-lg font-semibold text-gray-700">{{ action.title }}</h3>
+        <p class="text-sm text-gray-500">{{ action.description }}</p>
       </router-link>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const employeeName = ref('Employee')
+const employeeName = ref("Employee");
 
 const stats = ref([
-  { label: 'Customers', value: 85, icon: '👥' },
-  { label: 'Orders', value: 230, icon: '🛒' }
-])
+  { label: "Customers", value: 85, icon: "👥" },
+  { label: "Orders", value: 230, icon: "🛒" },
+]);
 
 const actions = ref([
-  { title: 'Manage Customers', description: 'Add, edit, or remove customers', link: '/manage-customers', icon: '👤' },
-  { title: 'Manage Orders', description: 'View and update orders', link: '/manage-orders', icon: '📝' }
-])
+  { title: "Manage Customers", description: "Add, edit, or remove customers", link: "/manage-customers", icon: "👤" },
+  { title: "Manage Orders", description: "View and update orders", link: "/manage-orders", icon: "📝" }
+]);
 </script>
-
-<style scoped>
-.employee-dashboard { max-width: 1200px; margin: auto; padding: 2rem; font-family: 'Poppins', sans-serif; text-align: center; color: #2c3e50; }
-h1 { font-size: 2.5rem; color: #27ae60; margin-bottom: 0.5rem; }
-h2 { font-size: 1.5rem; color: #34495e; margin-bottom: 2rem; }
-
-.stats-cards, .employee-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-.stat-card, .action-card { background: #dff9fb; border-radius: 12px; padding: 2rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.3s; }
-.stat-card:hover, .action-card:hover { transform: translateY(-5px); background: #c7ecee; }
-.stat-icon, .action-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-p { font-size: 1rem; color: #34495e; }
-
-@media (max-width: 768px) { .stats-cards, .employee-actions { grid-template-columns: 1fr; } }
-</style>
