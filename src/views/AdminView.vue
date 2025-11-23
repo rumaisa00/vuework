@@ -1,67 +1,129 @@
 <template>
-  <div class="px-4 py-10 max-w-7xl mx-auto">
-    <!-- Title -->
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-green-600">Admin Dashboard</h1>
-      <p class="text-gray-600 text-lg mt-2">Welcome, {{ adminName }}</p>
-    </div>
+  <div>
+    <Header />
+    <div class="admin-dashboard">
+      <h2>Admin Dashboard</h2>
 
-    <!-- Stats Section -->
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-12">
-      <div
-        v-for="stat in stats"
-        :key="stat.label"
-        class="bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1"
-      >
-        <div class="text-4xl mb-3">{{ stat.icon }}</div>
-        <h3 class="text-lg font-semibold text-gray-700">{{ stat.label }}</h3>
-        <p class="text-2xl font-bold text-green-600">{{ stat.value }}</p>
+      <!-- Tabs for Food, Supplies, Orders -->
+      <div class="tabs">
+        <button @click="activeTab='food'" :class="{active: activeTab==='food'}">Food</button>
+        <button @click="activeTab='supplies'" :class="{active: activeTab==='supplies'}">Supplies</button>
+        <button @click="activeTab='orders'" :class="{active: activeTab==='orders'}">Orders</button>
       </div>
-    </div>
 
-    <!-- Action Section -->
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Management</h2>
+      <!-- Food Management -->
+      <div v-if="activeTab==='food'" class="tab-content">
+        <h3>Manage Food</h3>
+        <div class="add-form">
+          <input v-model="newProduct.name" placeholder="Food Name" />
+          <input v-model.number="newProduct.price" type="number" placeholder="Price" />
+          <input v-model="newProduct.type" placeholder="Type" />
+          <button @click="addProduct('food')">Add Food</button>
+        </div>
+        <div class="product-list">
+          <div v-for="(item,index) in food" :key="index" class="product-card">
+            <p>{{ item.name }} - ${{ item.price }} ({{ item.type }})</p>
+            <button @click="removeProduct('food', index)">Remove</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      <router-link
-        v-for="action in actions"
-        :key="action.title"
-        :to="action.link"
-        class="block bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1 border border-gray-100"
-      >
-        <div class="text-4xl mb-3">{{ action.icon }}</div>
-        <h3 class="text-lg font-semibold text-gray-700 mb-1">
-          {{ action.title }}
-        </h3>
-        <p class="text-sm text-gray-500">{{ action.description }}</p>
-      </router-link>
+      <!-- Supplies Management -->
+      <div v-if="activeTab==='supplies'" class="tab-content">
+        <h3>Manage Supplies</h3>
+        <div class="add-form">
+          <input v-model="newProduct.name" placeholder="Supply Name" />
+          <input v-model.number="newProduct.price" type="number" placeholder="Price" />
+          <input v-model="newProduct.type" placeholder="Type" />
+          <button @click="addProduct('supplies')">Add Supply</button>
+        </div>
+        <div class="product-list">
+          <div v-for="(item,index) in supplies" :key="index" class="product-card">
+            <p>{{ item.name }} - ${{ item.price }} ({{ item.type }})</p>
+            <button @click="removeProduct('supplies', index)">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders View -->
+      <div v-if="activeTab==='orders'" class="tab-content">
+        <h3>Customer Orders</h3>
+        <div v-if="orders.length===0">No orders yet.</div>
+        <div v-else class="order-list">
+          <div v-for="order in orders" :key="order.id" class="order-card">
+            <p>Order #{{ order.id }}</p>
+            <p>Items: {{ order.items.map(i => i.name).join(', ') }}</p>
+            <p>Total: ${{ order.total }}</p>
+          </div>
+        </div>
+      </div>
+
     </div>
+    <Footer />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
 
-const adminName = ref("Admin");
+const activeTab = ref('food')
 
-const stats = ref([
-  { label: "Animals", value: 120, icon: "🐶" },
-  { label: "Customers", value: 85, icon: "👥" },
-  { label: "Orders", value: 230, icon: "🛒" },
-  { label: "Employees", value: 15, icon: "🧑‍💼" },
-]);
+const food = ref([
+  { name: 'Dog Food', price: 20, type: 'dry' },
+  { name: 'Cat Food', price: 15, type: 'wet' },
+])
+const supplies = ref([
+  { name: 'Leash', price: 10, type: 'pet accessory' },
+  { name: 'Pet Bed', price: 50, type: 'furniture' },
+])
+const orders = ref([
+  { id: 101, items: [{ name: 'Dog Food' }], total: 20 },
+  { id: 102, items: [{ name: 'Leash' }, { name: 'Cat Food' }], total: 25 }
+])
 
-const actions = ref([
-  { title: "Manage Pets", description: "Add, edit, or remove pets", link: "/manage-pets", icon: "🐾" },
-  { title: "Manage Food", description: "Add, edit, or remove food items", link: "/manage-food", icon: "🍖" },
-  { title: "Manage Supplies", description: "Update stock and details", link: "/manage-supplies", icon: "📦" },
-  { title: "Manage Orders", description: "View and update customer orders", link: "/manage-orders", icon: "📝" },
-  { title: "Manage Employees", description: "Add, edit, or remove employees", link: "/manage-employees", icon: "🧑‍💼" },
-]);
+const newProduct = ref({ name: '', price: 0, type: '' })
+
+const addProduct = (category) => {
+  if (!newProduct.value.name || newProduct.value.price <= 0 || !newProduct.value.type) {
+    return alert('Please fill all fields')
+  }
+  const product = { ...newProduct.value }
+  if(category==='food') food.value.push(product)
+  if(category==='supplies') supplies.value.push(product)
+  newProduct.value = { name: '', price: 0, type: '' }
+}
+
+const removeProduct = (category, index) => {
+  if(category==='food') food.value.splice(index, 1)
+  if(category==='supplies') supplies.value.splice(index, 1)
+}
 </script>
 
 <style scoped>
-body {
-  font-family: "Poppins", sans-serif;
+.admin-dashboard { padding: 2rem; }
+.tabs { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.tabs button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #ccc;
+  color: white;
 }
+.tabs button.active { background: #2196f3; }
+.tab-content { margin-top: 1rem; }
+.add-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.add-form input { padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; }
+.add-form button { background: #4caf50; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+.add-form button:hover { background: #45a049; }
+.product-card, .order-card {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+.product-card button { background: #ff9800; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 6px; cursor: pointer; }
+.product-card button:hover { background: #f57c00; }
 </style>
