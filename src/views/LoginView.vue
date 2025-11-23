@@ -1,19 +1,11 @@
 <template>
-  <div class="auth-container">
-    <div class="auth-card">
-      <h1 class="title">Login</h1>
-
-      <form @submit.prevent="login">
-        <input type="text" v-model="username" placeholder="Username" required />
-        <input type="password" v-model="password" placeholder="Password" required />
-
-        <button type="submit">Login</button>
-      </form>
-
-      <p class="switch-text">
-        Don’t have an account?
-        <RouterLink to="/signup" class="link">Signup</RouterLink>
-      </p>
+  <div class="login-page">
+    <div class="login-form">
+      <h1>SmartPetShop Login</h1>
+      <input v-model="username" placeholder="Username" />
+      <input v-model="password" type="password" placeholder="Password" />
+      <button @click="handleLogin">Login</button>
+      <p>Don't have an account? <router-link to="/signup">Sign Up</router-link></p>
     </div>
   </div>
 </template>
@@ -21,99 +13,57 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '../store/userStore'
 
 const router = useRouter()
+const store = useUserStore()
 
 const username = ref('')
 const password = ref('')
 
-const login = () => {
-  const user = {
-    username: username.value,
-    role:
-      username.value === "admin" ? "admin" :
-      username.value === "employee" ? "employee" :
-      "customer"
+const handleLogin = () => {
+  if(username.value && password.value){
+    const role = username.value === 'admin' ? 'admin' : 'customer'
+    store.login(username.value, role)
+    router.push(role === 'admin' ? '/admin' : '/customer')
+  } else {
+    alert('Enter valid credentials')
   }
-
-  localStorage.setItem("user", JSON.stringify(user))
-
-  if (user.role === "admin") router.push('/admin')
-  else if (user.role === "employee") router.push('/employee')
-  else router.push('/customer')
 }
 </script>
 
 <style scoped>
-.auth-container {
+.login-page {
   display: flex;
   justify-content: center;
-  padding-top: 6rem;
+  align-items: center;
+  height: 100vh;
+  background: #f2f2f2;
 }
-
-.auth-card {
-  width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  padding: 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+.login-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
-
-.title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #16a34a;
-  margin-bottom: 1.5rem;
-  font-family: 'Poppins', sans-serif;
-}
-
 input {
   width: 100%;
-  padding: 0.9rem;
-  margin: 0.6rem 0;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
-  transition: 0.3s;
-  font-size: 1rem;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
-
-input:focus {
-  border-color: #22c55e;
-  outline: none;
-  background: #ffffff;
-}
-
 button {
   width: 100%;
-  padding: 0.9rem;
-  margin-top: 1rem;
-  background: #16a34a;
+  padding: 0.8rem;
+  background: #4caf50;
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
 }
-
 button:hover {
-  background: #22c55e;
-}
-
-.switch-text {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-}
-
-.link {
-  color: #16a34a;
-  font-weight: 600;
-}
-
-.link:hover {
-  text-decoration: underline;
+  background: #45a049;
 }
 </style>
