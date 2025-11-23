@@ -27,4 +27,8 @@ export const useProductsStore = defineStore('products', {
     removeFood(id) { this.food = this.food.filter(f => f.id !== id) },
     removeSupply(id) { this.supplies = this.supplies.filter(s => s.id !== id) },
   },
+
 })
+
+})
+>>>>>>> 809f3c7 (Updated components, views, stores, and styles)

@@ -1,33 +1,52 @@
 <template>
   <div class="card">
-    <h2>Bill / Receipt</h2>
-    <div v-if="!order">
-      <div class="empty">No bill data found.</div>
-    </div>
+    <h2>Your Cart</h2>
+
+    <div v-if="items.length === 0" class="empty">Your cart is empty — add something from Pets/Food/Supplies.</div>
+
     <div v-else>
-      <div class="kv">Order #: {{ order.id }}</div>
-      <div class="kv">Date: {{ new Date(order.date).toLocaleString() }}</div>
-      <div style="margin-top:1rem">
-        <div v-for="it in order.items" :key="it.productId" class="kv">{{ it.qty }} × {{ it.name }} — ${{ it.price }}</div>
+      <div v-for="it in items" :key="it.id" class="card" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+        <div>
+          <strong>{{ it.name }}</strong>
+          <div class="kv">qty: {{ it.qty }} · ${{ it.price }} each</div>
+        </div>
+        <div>
+          <button class="btn small" @click="remove(it.id)">Remove</button>
+        </div>
       </div>
-      <div style="margin-top:1rem;text-align:right"><strong>Total: ${{ order.total }}</strong></div>
-      <div style="margin-top:1rem">
-        <button class="btn btn-primary" @click="goHome">Back to shop</button>
+
+      <div style="margin-top:1rem;text-align:right">
+        <div class="kv">Total: ${{ total }}</div>
+        <button class="btn btn-primary" style="margin-top:0.8rem" @click="onCheckout">Checkout</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user.js'
 
-const route = useRoute()
+import { useCartStore } from '../stores/cart.js'
+import { useRouter } from 'vue-router'
+>>>>>>> 809f3c7 (Updated components, views, stores, and styles)
+
+const cart = useCartStore()
 const router = useRouter()
-const user = useUserStore()
 
-const orderId = Number(route.query.orderId)
-const order = user.user?.orders?.find(o => o.id === orderId) || null
+const items = cart.items
+const total = cart.total
 
-function goHome() { router.push('/pets') }
+function remove(id) { cart.removeItem(id) }
+
+function onCheckout() {
+  try {
+    const order = cart.checkout()
+    // navigate to Bill with order id and total as query
+    router.push({ name: 'Bill', query: { orderId: order.id, total: order.total } })
+  } catch (err) {
+    alert(err.message || 'Checkout failed')
+  }
+}
 </script>

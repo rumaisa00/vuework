@@ -30,4 +30,8 @@ const allProducts = productsStore.allProducts
   border-radius: 6px;
   width: 200px;
 }
+
 </style>
+
+</style>
+>>>>>>> 809f3c7 (Updated components, views, stores, and styles)

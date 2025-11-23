@@ -172,4 +172,8 @@ function changeOrderStatus(order, status){
     if(usersStore.updateOrder) usersStore.updateOrder(u.id, u.orders[idx])
   }
 }
+
 </script>
+
+</script>
+>>>>>>> 809f3c7 (Updated components, views, stores, and styles)
