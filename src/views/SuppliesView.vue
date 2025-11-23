@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useProductsStore } from '../views/productView.vue'
+import { useProductsStore } from '../stores/productStore.js'
 import { useCartStore } from '../stores/cart'
 
 const products = useProductsStore()
