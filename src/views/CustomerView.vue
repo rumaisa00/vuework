@@ -1,6 +1,6 @@
 <template>
   <div class="customer-container">
-    <HeaderBar />
+    <AppHeader />
 
     <div class="hero">
       <h1>Find What Your Pet Needs 🐾</h1>
@@ -27,12 +27,11 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useProductStore } from "../views/productView.vue";
+import { useProductsStore } from "../stores/productStore.js"; // corrected path
 import { useCartStore } from "../stores/cart.js";
-import AppHeader from '../components/layout/AppHeader.vue'
+import AppHeader from '../components/layout/AppHeader.vue';
 
-
-const productStore = useProductStore();
+const productStore = useProductsStore();
 const cartStore = useCartStore();
 
 const search = ref("");
@@ -41,9 +40,9 @@ const category = ref("all");
 const filterCategory = (c) => category.value = c;
 
 const filteredProducts = computed(() => {
-  let list = productStore.products;
+  let list = productStore.allProducts; // use allProducts from store
 
-  if (category.value !== "all") list = list.filter(p => p.category === category.value);
+  if (category.value !== "all") list = list.filter(p => p.type === category.value);
 
   if (search.value.trim()) {
     list = list.filter(p =>
