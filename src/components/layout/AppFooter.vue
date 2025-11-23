@@ -1,13 +1,11 @@
 <template>
-  <footer class="app-footer">
-    <div class="container">
+  <footer class="bg-gray-900 text-gray-200 py-6 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 px-4">
       <p>&copy; {{ currentYear }} SmartPetShop. Built with Vue 3.</p>
-      <div class="footer-links">
-        <a href="https://github.com/yourusername/your-repo" target="_blank" rel="noopener">
-          GitHub
-        </a>
+      <div class="flex gap-4 items-center text-sm">
+        <a href="https://github.com/yourusername/your-repo" target="_blank" class="hover:text-green-400">GitHub</a>
         <span>•</span>
-        <a href="mailto:your.email@example.com">Contact</a>
+        <a href="mailto:your.email@example.com" class="hover:text-green-400">Contact</a>
       </div>
     </div>
   </footer>
@@ -15,52 +13,5 @@
 
 <script setup>
 import { computed } from 'vue'
-
 const currentYear = computed(() => new Date().getFullYear())
 </script>
-
-<style scoped>
-.app-footer {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  padding: 2rem;
-  margin-top: auto;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.footer-links a {
-  color: #ecf0f1;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: #27ae60;
-}
-
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .app-footer {
-    padding: 1.5rem 1rem;
-  }
-}
-</style>
