@@ -1,32 +1,30 @@
 <template>
-  <div class="orders-page">
+  <div class="card">
     <h2>Your Orders</h2>
-    <div v-if="orders.length === 0">No orders yet.</div>
-    <div v-else class="order-list">
-      <div v-for="order in orders" :key="order.id" class="order-card">
-        <p>Order #{{ order.id }}</p>
-        <p>Items: {{ order.items.map(i => i.name).join(', ') }}</p>
-        <p>Total: ${{ order.total }}</p>
+    <div v-if="orders.length === 0" class="empty">No orders yet.</div>
+
+    <div v-else>
+      <div v-for="o in orders" :key="o.id" class="card" style="margin-bottom:0.8rem">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div><strong>Order #{{ o.id }}</strong></div>
+            <div class="kv">Date: {{ new Date(o.date).toLocaleString() }}</div>
+            <div class="kv">Status: {{ o.status }}</div>
+          </div>
+          <div><strong>${{ o.total }}</strong></div>
+        </div>
+        <div style="margin-top:0.6rem">
+          <div v-for="item in o.items" :key="item.productId" class="kv">{{ item.qty }} × {{ item.name }} — ${{ item.price }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useUserStore } from '../stores/user'
 
-const orders = ref([
-  // Example order
-  { id: 101, items: [{ name: 'Dog Food' }, { name: 'Cat Toy' }], total: 25 }
-])
+const user = useUserStore()
+const orders = computed(() => user.user?.orders || [])
 </script>
-
-<style scoped>
-.orders-page { padding: 2rem; }
-.order-card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-</style>
