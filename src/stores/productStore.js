@@ -11,6 +11,7 @@ export const useProductsStore = defineStore('products', {
     addPet(pet) { this.pets.push(pet) },
     addFood(food) { this.food.push(food) },
     addSupply(supply) { this.supplies.push(supply) },
+
     updatePet(id, payload) {
       const idx = this.pets.findIndex(p => p.id === id)
       if (idx !== -1) this.pets[idx] = { ...this.pets[idx], ...payload }
@@ -23,12 +24,9 @@ export const useProductsStore = defineStore('products', {
       const idx = this.supplies.findIndex(s => s.id === id)
       if (idx !== -1) this.supplies[idx] = { ...this.supplies[idx], ...payload }
     },
+
     removePet(id) { this.pets = this.pets.filter(p => p.id !== id) },
     removeFood(id) { this.food = this.food.filter(f => f.id !== id) },
     removeSupply(id) { this.supplies = this.supplies.filter(s => s.id !== id) },
-  },
-
+  }
 })
-
-})
->>>>>>> 809f3c7 (Updated components, views, stores, and styles)

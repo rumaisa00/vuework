@@ -34,4 +34,4 @@ const allProducts = productsStore.allProducts
 </style>
 
 </style>
->>>>>>> 809f3c7 (Updated components, views, stores, and styles)
+ 
