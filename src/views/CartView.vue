@@ -1,28 +1,28 @@
 <template>
-  <div class="cart-page">
-    <h1>My Cart</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in cart" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.price }}$</td>
-          <td>{{ item.quantity * item.price }}$</td>
-          <td><button @click="removeItem(item.id)">Remove</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <h3>Total: {{ total }}$</h3>
-    <button @click="checkout" class="btn-checkout">Checkout</button>
+  <div class="cart-page max-w-5xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">My Cart</h1>
+
+    <div v-if="cart.length" class="space-y-6">
+      <div v-for="item in cart" :key="item.id" class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex justify-between items-center">
+        <div>
+          <h2 class="text-xl font-semibold">{{ item.name }}</h2>
+          <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+          <p class="text-gray-600">Price: ${{ item.price }}</p>
+        </div>
+        <div class="flex flex-col items-end">
+          <p class="font-bold text-lg">Total: ${{ item.quantity * item.price }}</p>
+          <button @click="removeItem(item.id)" class="btn-danger mt-2">Remove</button>
+        </div>
+      </div>
+
+      <div class="text-right font-bold text-xl mt-4">
+        Total: ${{ total }}
+      </div>
+
+      <button @click="checkout" class="btn-primary mt-4 float-right">Checkout</button>
+    </div>
+
+    <div v-else class="text-center text-gray-500 text-lg">Your cart is empty</div>
   </div>
 </template>
 
@@ -37,18 +37,14 @@ const cart = ref([
 const total = computed(() => cart.value.reduce((sum, item) => sum + item.quantity * item.price, 0))
 
 const removeItem = (id) => { cart.value = cart.value.filter(i => i.id !== id) }
-const checkout = () => alert(`Total payment: ${total.value}$`)
+const checkout = () => alert(`Total payment: $${total.value}`)
 </script>
 
 <style scoped>
-.cart-page { max-width: 1000px; margin: 2rem auto; padding: 1rem; font-family: 'Poppins', sans-serif; }
-h1 { color: #27ae60; margin-bottom: 1rem; text-align: center; }
-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-th, td { padding: 0.8rem; border: 1px solid #ddd; text-align: center; }
-th { background: #dff9fb; }
-button { padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer; margin: 0 0.2rem; }
-button:hover { opacity: 0.8; }
-.btn-checkout { background: #27ae60; color: white; margin-top: 1rem; }
-.btn-checkout:hover { background: #2ecc71; }
-h3 { text-align: right; }
+.btn-primary {
+  @apply px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition;
+}
+.btn-danger {
+  @apply px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition;
+}
 </style>
