@@ -1,66 +1,57 @@
 <template>
-  <div class="signup-page">
-    <div class="signup-form">
-      <h1>Sign Up</h1>
-      <input v-model="username" placeholder="Username" />
-      <input v-model="password" type="password" placeholder="Password" />
-      <button @click="handleSignup">Sign Up</button>
-      <p>Already have an account? <router-link to="/">Login</router-link></p>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2>Create an Account</h2>
+
+      <input v-model="username" placeholder="Username" class="input" />
+      <input v-model="password" type="password" placeholder="Password" class="input" />
+
+      <button class="btn" @click="register">Signup</button>
+
+      <p class="switch">
+        Already have an account?
+        <router-link to="/login">Login</router-link>
+      </p>
+
+      <p v-if="error" class="error">{{ error }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useUserStore } from "../stores/userStore";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
-const username = ref('')
-const password = ref('')
+const router = useRouter();
+const userStore = useUserStore();
 
-const handleSignup = () => {
-  if(username.value && password.value){
-    alert('Account created! Please login.')
-    router.push('/')
-  } else {
-    alert('Fill in all fields')
+const username = ref("");
+const password = ref("");
+const error = ref("");
+
+const register = () => {
+  if (username.value.length < 3) {
+    error.value = "Username too short.";
+    return;
   }
-}
+
+  userStore.signup(username.value, password.value);
+  router.push("/customer");
+};
 </script>
 
 <style scoped>
-/* Reuse login styling for simplicity */
-.signup-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #f2f2f2;
+.auth-container {
+  display: flex; justify-content: center; align-items: center;
+  height: 100vh; background: #f5f5f5;
 }
-.signup-form {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  text-align: center;
+.auth-box {
+  background: white; padding: 30px; width: 350px;
+  border-radius: 15px; text-align: center; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-input {
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-button {
-  width: 100%;
-  padding: 0.8rem;
-  background: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-button:hover {
-  background: #1976d2;
-}
+.input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; }
+.btn { width: 100%; padding: 12px; background: #4e9cff; color: white; border: none; border-radius: 10px; cursor: pointer; }
+.error { color: red; margin-top: 10px; }
 </style>
