@@ -376,7 +376,6 @@ function changeOrderStatus(order, status){
 }
 
 // expose users store for wrappers
-const usersStore = usersStore
 
 </script>
 
