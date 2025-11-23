@@ -16,7 +16,7 @@
 
 <script setup>
 import { useProductsStore } from '../stores/productStore.js'
-import { useCartStore } from '../stores/cart'
+import { useCartStore } from '../stores/cart.js'
 
 const products = useProductsStore()
 const cart = useCartStore()
