@@ -29,7 +29,7 @@
 import { ref, computed } from "vue";
 import { useProductStore } from "../views/productView.vue";
 import { useCartStore } from "../stores/cart.js";
-import AppHeader from "../components/AppHeader.vue";
+import Header from "../components/AppHeader.vue";
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
