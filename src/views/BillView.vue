@@ -1,46 +1,35 @@
 <template>
-  <div class="bill-page max-w-5xl mx-auto px-6 py-12">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Bill</h1>
-
-    <table class="w-full table-auto border-collapse mb-6">
-      <thead>
-        <tr class="bg-blue-100">
-          <th class="border px-4 py-2">Item</th>
-          <th class="border px-4 py-2">Quantity</th>
-          <th class="border px-4 py-2">Price</th>
-          <th class="border px-4 py-2">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in billItems" :key="item.id" class="hover:bg-gray-50">
-          <td class="border px-4 py-2">{{ item.name }}</td>
-          <td class="border px-4 py-2">{{ item.quantity }}</td>
-          <td class="border px-4 py-2">${{ item.price }}</td>
-          <td class="border px-4 py-2">${{ item.quantity * item.price }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="text-right font-bold text-xl mb-4">Total Amount: ${{ total }}</div>
-    <button @click="printBill" class="btn-primary float-right">Print PDF</button>
+  <div class="bill-page">
+    <h2>Bill</h2>
+    <p>Total Amount: ${{ total }}</p>
+    <p>Thank you for shopping at SmartPetShop!</p>
+    <button @click="goHome">Back to Shop</button>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-const billItems = ref([
-  { id: 1, name: 'Dog Food', quantity: 2, price: 15 },
-  { id: 2, name: 'Cat Toy', quantity: 1, price: 10 }
-])
+const route = useRoute()
+const router = useRouter()
+const total = route.params.total || 0
 
-const total = computed(() => billItems.value.reduce((sum, i) => sum + i.quantity * i.price, 0))
-
-const printBill = () => alert('Print PDF functionality coming soon')
+const goHome = () => router.push('/customer')
 </script>
 
 <style scoped>
-.btn-primary {
-  @apply px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition;
+.bill-page {
+  padding: 2rem;
+  text-align: center;
 }
+button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover { background: #45a049; }
 </style>
