@@ -2,10 +2,17 @@
   <div class="card">
     <h2>Your Cart</h2>
 
-    <div v-if="items.length === 0" class="empty">Your cart is empty — add something from Pets/Food/Supplies.</div>
+    <div v-if="items.length === 0" class="empty">
+      Your cart is empty — add something from Pets/Food/Supplies.
+    </div>
 
     <div v-else>
-      <div v-for="it in items" :key="it.id" class="card" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+      <div
+        v-for="it in items"
+        :key="it.id"
+        class="card"
+        style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem"
+      >
         <div>
           <strong>{{ it.name }}</strong>
           <div class="kv">qty: {{ it.qty }} · ${{ it.price }} each</div>
@@ -17,20 +24,18 @@
 
       <div style="margin-top:1rem;text-align:right">
         <div class="kv">Total: ${{ total }}</div>
-        <button class="btn btn-primary" style="margin-top:0.8rem" @click="onCheckout">Checkout</button>
+        <button class="btn btn-primary" style="margin-top:0.8rem" @click="onCheckout">
+          Checkout
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-
-import { useRoute, useRouter } from 'vue-router'
-import { useUserStore } from '../stores/user.js'
-
-import { useCartStore } from '../stores/cart.js'
 import { useRouter } from 'vue-router'
->>>>>>> 809f3c7 (Updated components, views, stores, and styles)
+import { useCartStore } from '../stores/cart.js'
+import { useUserStore } from '../stores/user.js'
 
 const cart = useCartStore()
 const router = useRouter()
@@ -38,7 +43,9 @@ const router = useRouter()
 const items = cart.items
 const total = cart.total
 
-function remove(id) { cart.removeItem(id) }
+function remove(id) {
+  cart.removeItem(id)
+}
 
 function onCheckout() {
   try {
