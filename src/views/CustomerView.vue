@@ -3,17 +3,14 @@
     <h1>Customer Dashboard</h1>
     <h2>Welcome, {{ customerName }}</h2>
 
-```
-<!-- Quick Links -->
-<div class="customer-actions">
-  <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
-    <div class="action-icon">{{ action.icon }}</div>
-    <h3>{{ action.title }}</h3>
-    <p>{{ action.description }}</p>
-  </router-link>
-</div>
-```
-
+    <!-- Quick Links -->
+    <div class="customer-actions">
+      <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
+        <div class="action-icon">{{ action.icon }}</div>
+        <h3>{{ action.title }}</h3>
+        <p>{{ action.description }}</p>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -31,37 +28,13 @@ const actions = ref([
 </script>
 
 <style scoped>
-.customer-dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Poppins', sans-serif;
-  color: #2c3e50;
-  text-align: center;
-}
+.customer-dashboard { max-width: 1200px; margin: auto; padding: 2rem; font-family: 'Poppins', sans-serif; text-align: center; color: #2c3e50; }
 h1 { font-size: 2.5rem; color: #27ae60; margin-bottom: 0.5rem; }
 h2 { font-size: 1.5rem; color: #34495e; margin-bottom: 2rem; }
 
-.customer-actions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
-
-.action-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #dff9fb;
-  border-radius: 12px;
-  padding: 2rem;
-  text-decoration: none;
-  color: #2d3436;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-}
+.customer-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.5rem; }
+.action-card { display: flex; flex-direction: column; align-items: center; background: #dff9fb; border-radius: 12px; padding: 2rem; text-decoration: none; color: #2d3436; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.3s; }
 .action-card:hover { transform: translateY(-7px); background: #c7ecee; }
-
 .action-icon { font-size: 2.5rem; margin-bottom: 0.7rem; }
 h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
 p { font-size: 1rem; color: #34495e; }
