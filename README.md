@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-Updated README with new project info
->>>>>>> 9fa0dee (Replace BoardView with OrdersBoard for Pet Store project)
+
 # SmartPetShop — Online Pet Store Management System
 
 SmartPetShop is a web-based platform designed to help pet shops manage their daily operations efficiently. The system supports three user roles — **Admin**, **Employee**, and **Customer** — each with different permissions for managing pets, food, supplies, customers, and orders. The application ensures accurate inventory tracking, smooth order processing, and a simple user experience.
