@@ -1,43 +1,36 @@
 <template>
-  <div class="customer-dashboard">
-    <h1>Customer Dashboard</h1>
-    <h2>Welcome, {{ customerName }}</h2>
+  <div class="px-4 py-10 max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-green-600">Customer Dashboard</h1>
+      <p class="text-gray-600 text-lg mt-2">Welcome, {{ customerName }}</p>
+    </div>
 
-    <!-- Quick Links -->
-    <div class="customer-actions">
-      <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
-        <div class="action-icon">{{ action.icon }}</div>
-        <h3>{{ action.title }}</h3>
-        <p>{{ action.description }}</p>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Actions</h2>
+
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <router-link
+        v-for="action in actions"
+        :key="action.title"
+        :to="action.link"
+        class="block bg-white rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1 border border-gray-100"
+      >
+        <div class="text-4xl mb-3">{{ action.icon }}</div>
+        <h3 class="text-lg font-semibold text-gray-700 mb-1">{{ action.title }}</h3>
+        <p class="text-sm text-gray-500">{{ action.description }}</p>
       </router-link>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const customerName = ref('Customer')
+const customerName = ref("Customer");
 
 const actions = ref([
-  { title: 'View Menu', description: 'Check pets, food, and supplies', link: '/menu', icon: '🛍️' },
-  { title: 'My Orders', description: 'View order status and bills', link: '/my-orders', icon: '🛒' },
-  { title: 'Cart', description: 'Add or edit items in cart', link: '/cart', icon: '🛒' },
-  { title: 'Rate Services', description: 'Provide feedback for the shop', link: '/rate', icon: '⭐' }
-])
+  { title: "View Menu", description: "Check pets, food, and supplies", link: "/menu", icon: "🛍️" },
+  { title: "My Orders", description: "View order status and bills", link: "/my-orders", icon: "🛒" },
+  { title: "Cart", description: "Add or edit items", link: "/cart", icon: "🛒" },
+  { title: "Rate Services", description: "Rate our shop", link: "/rate", icon: "⭐" },
+]);
 </script>
-
-<style scoped>
-.customer-dashboard { max-width: 1200px; margin: auto; padding: 2rem; font-family: 'Poppins', sans-serif; text-align: center; color: #2c3e50; }
-h1 { font-size: 2.5rem; color: #27ae60; margin-bottom: 0.5rem; }
-h2 { font-size: 1.5rem; color: #34495e; margin-bottom: 2rem; }
-
-.customer-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.5rem; }
-.action-card { display: flex; flex-direction: column; align-items: center; background: #dff9fb; border-radius: 12px; padding: 2rem; text-decoration: none; color: #2d3436; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.3s; }
-.action-card:hover { transform: translateY(-7px); background: #c7ecee; }
-.action-icon { font-size: 2.5rem; margin-bottom: 0.7rem; }
-h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-p { font-size: 1rem; color: #34495e; }
-
-@media (max-width: 768px) { .customer-actions { grid-template-columns: 1fr; } }
-</style>
