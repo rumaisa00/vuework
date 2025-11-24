@@ -1,43 +1,75 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { useUserStore } from './user'
+import { defineStore } from 'pinia';
 
+export const useCartStore = defineStore('cart', {
+  state: () => ({
+    items: [],
+  }),
 
-export const useCartStore = defineStore('cart', () => {
-  const items = ref([]) // { id, productId, name, price, qty, kind }
+  getters: {
+    itemCount: (state) => {
+      return state.items.reduce((total, item) => total + item.quantity, 0);
+    },
 
-  const total = computed(() => items.value.reduce((s, it) => s + it.price * it.qty, 0))
+    totalPrice: (state) => {
+      return state.items.reduce((total, item) => {
+        const price = item.discount 
+          ? item.price * (1 - item.discount / 100)
+          : item.price;
+        return total + (price * item.quantity);
+      }, 0);
+    },
 
-  function addToCart(product, kind = 'product') {
-    const existing = items.value.find(i => i.productId === product.id && i.kind === kind)
-    if (existing) existing.qty += 1
-    else items.value.push({ id: Date.now(), productId: product.id, name: product.name, price: product.price, qty: 1, kind })
-  }
+    cartItems: (state) => state.items,
+  },
 
-  function removeItem(id) {
-    items.value = items.value.filter(i => i.id !== id)
-  }
+  actions: {
+    addItem(product) {
+      const existingItem = this.items.find(item => item.id === product.id);
+      
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        this.items.push({
+          ...product,
+          quantity: 1,
+        });
+      }
 
-  function clear() { items.value = [] }
+      this.saveToLocalStorage();
+    },
 
-  function checkout() {
-    const user = useUserStore()
-    if (!user.user) throw new Error('Not logged in')
-    // create order in user's orders
-    const order = {
-      id: Date.now(),
-      userId: user.user.id,
-      items: items.value.map(i => ({ productId: i.productId, name: i.name, qty: i.qty, price: i.price })),
-      total: total.value,
-      date: new Date().toISOString(),
-      status: 'pending'
-    }
-    // store orders in user store
-    user.orders = user.orders || []
-    user.orders.push(order)
-    clear()
-    return order
-  }
+    removeItem(productId) {
+      this.items = this.items.filter(item => item.id !== productId);
+      this.saveToLocalStorage();
+    },
 
-  return { items, total, addToCart, removeItem, clear, checkout }
-})
+    updateQuantity(productId, quantity) {
+      const item = this.items.find(item => item.id === productId);
+      
+      if (item) {
+        if (quantity <= 0) {
+          this.removeItem(productId);
+        } else {
+          item.quantity = quantity;
+          this.saveToLocalStorage();
+        }
+      }
+    },
+
+    clearCart() {
+      this.items = [];
+      this.saveToLocalStorage();
+    },
+
+    saveToLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.items));
+    },
+
+    loadFromLocalStorage() {
+      const stored = localStorage.getItem('cart');
+      if (stored) {
+        this.items = JSON.parse(stored);
+      }
+    },
+  },
+});
