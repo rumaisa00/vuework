@@ -1,80 +1,127 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import axios from 'axios';
 
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  role: 'admin' | 'employee' | 'customer';
-  name: string;
-}
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null,
+    token: null,
+    isAuthenticated: false,
+    loading: false,
+    error: null,
+  }),
 
-export const useAuthStore = defineStore('auth', () => {
-  // State
-  const user = ref<User | null>(null);
-  const token = ref<string | null>(localStorage.getItem('token'));
+  getters: {
+    isAdmin: (state) => {
+      return state.user?.role === 'admin';
+    },
 
-  // Getters
-  const isAuthenticated = computed(() => !!user.value);
-  const isAdmin = computed(() => user.value?.role === 'admin');
-  const isEmployee = computed(() => user.value?.role === 'employee');
-  const isCustomer = computed(() => user.value?.role === 'customer');
-  
-  const canManageInventory = computed(() => isAdmin.value);
-  const canManageOrders = computed(() => isAdmin.value || isEmployee.value);
-  const canManageCustomers = computed(() => isAdmin.value || isEmployee.value);
+    isEmployee: (state) => {
+      return state.user?.role === 'employee';
+    },
 
-  // Actions
-  function initializeAuth() {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    isCustomer: (state) => {
+      return state.user?.role === 'customer';
+    },
+
+    userRole: (state) => {
+      return state.user?.role || null;
+    },
+  },
+
+  actions: {
+    async login(credentials) {
+      this.loading = true;
+      this.error = null;
+
       try {
-        user.value = JSON.parse(storedUser);
-      } catch (e) {
-        console.error('Failed to parse stored user:', e);
+        const response = await axios.post('/api/auth/login', credentials);
+        const { user, token } = response.data;
+
+        this.user = user;
+        this.token = token;
+        this.isAuthenticated = true;
+
+        // Store in localStorage
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Set default auth header
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        return user;
+      } catch (error) {
+        this.error = error.response?.data?.message || 'Login failed';
+        throw error;
+      } finally {
+        this.loading = false;
       }
-    } else {
-      // For testing: set default admin user
-      user.value = {
-        id: 1,
-        username: 'admin',
-        email: 'admin@petshop.com',
-        role: 'admin',
-        name: 'Admin User'
-      };
-      localStorage.setItem('user', JSON.stringify(user.value));
-    }
-  }
+    },
 
-  function setRole(role: 'admin' | 'employee' | 'customer') {
-    if (user.value) {
-      user.value.role = role;
-      localStorage.setItem('user', JSON.stringify(user.value));
-    }
-  }
+    async register(userData) {
+      this.loading = true;
+      this.error = null;
 
-  function logout() {
-    user.value = null;
-    token.value = null;
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  }
+      try {
+        const response = await axios.post('/api/auth/register', userData);
+        const { user, token } = response.data;
 
-  return {
-    // State
-    user,
-    token,
-    // Getters
-    isAuthenticated,
-    isAdmin,
-    isEmployee,
-    isCustomer,
-    canManageInventory,
-    canManageOrders,
-    canManageCustomers,
-    // Actions
-    initializeAuth,
-    setRole,
-    logout
-  };
+        this.user = user;
+        this.token = token;
+        this.isAuthenticated = true;
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        return user;
+      } catch (error) {
+        this.error = error.response?.data?.message || 'Registration failed';
+        throw error;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    logout() {
+      this.user = null;
+      this.token = null;
+      this.isAuthenticated = false;
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      delete axios.defaults.headers.common['Authorization'];
+    },
+
+    async checkAuth() {
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+
+      if (token && user) {
+        this.token = token;
+        this.user = JSON.parse(user);
+        this.isAuthenticated = true;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        // Optionally verify token with backend
+        try {
+          await axios.get('/api/auth/verify');
+        } catch (error) {
+          // Token is invalid, logout
+          this.logout();
+        }
+      }
+    },
+
+    async updateProfile(userData) {
+      try {
+        const response = await axios.put('/api/auth/profile', userData);
+        this.user = response.data;
+        localStorage.setItem('user', JSON.stringify(this.user));
+        return this.user;
+      } catch (error) {
+        this.error = error.response?.data?.message || 'Update failed';
+        throw error;
+      }
+    },
+  },
 });
