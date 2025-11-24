@@ -1,202 +1,227 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50">
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden py-20 px-4">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="space-y-6">
-            <h2 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-              Find Your
-              <span class="block bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Perfect Pet
-              </span>
-            </h2>
-            <p class="text-xl text-gray-600">
-              Discover a world of love, care, and companionship. Your furry friend awaits!
-            </p>
-            <div class="flex flex-wrap gap-4">
-              <button 
-                @click="$router.push('/products')"
-                class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-              >
-                Shop Now
-              </button>
-              <button 
-                @click="$router.push('/about')"
-                class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold border-2 border-purple-600 hover:bg-purple-50 transition-all duration-200"
-              >
-                Learn More
-              </button>
-            </div>
-            
-            <!-- Stats -->
-            <div class="grid grid-cols-3 gap-4 pt-8">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-purple-600">{{ stats.pets }}+</div>
-                <div class="text-sm text-gray-600">Happy Pets</div>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-pink-600">{{ stats.products }}+</div>
-                <div class="text-sm text-gray-600">Products</div>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-orange-600">24/7</div>
-                <div class="text-sm text-gray-600">Support</div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Hero Image Area -->
-          <div class="relative">
-            <div class="relative z-10 bg-gradient-to-br from-purple-400/20 to-pink-400/20 backdrop-blur-sm rounded-3xl p-8 border border-white/50 shadow-2xl">
-              <div class="text-9xl text-center mb-4">🐕‍🦺</div>
-              <div class="flex justify-center space-x-4 text-6xl">
-                <span class="animate-bounce">🐱</span>
-                <span class="animate-bounce animation-delay-100">🐦</span>
-                <span class="animate-bounce animation-delay-200">🐠</span>
-              </div>
-            </div>
-            <!-- Floating Elements -->
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-purple-400 rounded-full blur-3xl opacity-50 animate-pulse"></div>
-            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-pink-400 rounded-full blur-3xl opacity-50 animate-pulse animation-delay-1000"></div>
-          </div>
+  <div class="home-view">
+    <section class="hero">
+      <h1>Welcome to Pet Store Management System</h1>
+      <p class="subtitle">
+        Manage pets, food, supplies, customers, and orders with a modern smart dashboard
+      </p>
+
+      <div class="cta-buttons">
+        <RouterLink to="/products" class="btn btn-primary">Browse Products</RouterLink>
+        <RouterLink to="/login" class="btn btn-secondary">Login</RouterLink>
+        <RouterLink to="/signup" class="btn btn-secondary">Sign Up</RouterLink>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">🐶</div>
+          <h3>Manage Pets</h3>
+          <p>Add, edit, and remove pets from the store inventory</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">🍖</div>
+          <h3>Food & Supplies</h3>
+          <p>Track stock, update quantities, and control product availability</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">🛒</div>
+          <h3>Customer Orders</h3>
+          <p>Customers can place orders and view detailed bills</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">⭐</div>
+          <h3>Ratings</h3>
+          <p>View customer feedback and store ratings</p>
         </div>
       </div>
     </section>
 
-    <!-- Category Filter - Bento Style -->
-    <section class="max-w-7xl mx-auto px-4 py-8">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <button
-          v-for="cat in categories"
-          :key="cat.id"
-          @click="navigateToCategory(cat.id)"
-          class="group relative overflow-hidden p-6 rounded-2xl transition-all duration-300 transform hover:scale-105 bg-white hover:bg-purple-50 text-gray-700 border-2 border-gray-200 hover:border-purple-300"
-        >
-          <div class="text-4xl mb-2">{{ cat.icon }}</div>
-          <div class="font-semibold text-sm">{{ cat.name }}</div>
-        </button>
+    <section class="stats">
+      <div class="stat-item">
+        <h3>{{ stats.pets }}</h3>
+        <p>Pets Available</p>
       </div>
-    </section>
-
-    <!-- Featured Products Preview -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-      <div class="flex items-center justify-between mb-8">
-        <h3 class="text-3xl font-bold text-gray-900">Featured Products</h3>
-        <button 
-          @click="$router.push('/products')"
-          class="text-purple-600 hover:text-purple-700 font-semibold flex items-center gap-2"
-        >
-          View All
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
+      <div class="stat-item">
+        <h3>{{ stats.foods }}</h3>
+        <p>Food Items</p>
       </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <ProductCard
-          v-for="product in featuredProducts"
-          :key="product.id"
-          :product="product"
-          @add-to-cart="handleAddToCart"
-          @toggle-favorite="handleToggleFavorite"
-          :is-favorite="favorites.includes(product.id)"
-        />
+      <div class="stat-item">
+        <h3>{{ stats.customers }}</h3>
+        <p>Customers</p>
       </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="max-w-7xl mx-auto px-4 py-20">
-      <h3 class="text-4xl font-bold text-center mb-12 text-gray-900">
-        Why Choose Us?
-      </h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div
-          v-for="(feature, idx) in features"
-          :key="idx"
-          class="group p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-purple-200"
-        >
-          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-            {{ feature.icon }}
-          </div>
-          <h4 class="text-2xl font-bold mb-2 text-gray-900">{{ feature.title }}</h4>
-          <p class="text-gray-600">{{ feature.desc }}</p>
-        </div>
+      <div class="stat-item">
+        <h3>{{ stats.orders }}</h3>
+        <p>Total Orders</p>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useProductStore } from '@/stores/product';
-import { useCartStore } from '@/stores/cart';
-import ProductCard from '@/components/ProductCard.vue';
-
-const router = useRouter();
-const productStore = useProductStore();
-const cartStore = useCartStore();
+import { ref } from "vue";
 
 const stats = ref({
-  pets: 500,
-  products: 1000
-});
-
-const favorites = ref([]);
-
-const categories = [
-  { id: 'all', name: 'All Products', icon: '🏪' },
-  { id: 'pets', name: 'Pets', icon: '🐕' },
-  { id: 'food', name: 'Food', icon: '🍖' },
-  { id: 'supplies', name: 'Supplies', icon: '🏠' },
-  { id: 'toys', name: 'Toys', icon: '🎾' },
-  { id: 'health', name: 'Health', icon: '💊' },
-];
-
-const features = [
-  { icon: '🏆', title: 'Quality Products', desc: 'Only the best for your pets' },
-  { icon: '🚚', title: 'Fast Delivery', desc: 'Get it delivered to your doorstep' },
-  { icon: '💝', title: 'Expert Care', desc: '24/7 support from pet experts' },
-];
-
-const featuredProducts = computed(() => {
-  return productStore.products.slice(0, 6);
-});
-
-const navigateToCategory = (categoryId) => {
-  router.push({ name: 'products', query: { category: categoryId } });
-};
-
-const handleAddToCart = (product) => {
-  cartStore.addItem(product);
-};
-
-const handleToggleFavorite = (productId) => {
-  const index = favorites.value.indexOf(productId);
-  if (index > -1) {
-    favorites.value.splice(index, 1);
-  } else {
-    favorites.value.push(productId);
-  }
-};
-
-onMounted(async () => {
-  await productStore.fetchProducts();
+  pets: 12,
+  foods: 25,
+  customers: 8,
+  orders: 4,
 });
 </script>
 
 <style scoped>
-.animation-delay-100 {
-  animation-delay: 0.1s;
+.home-view {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.animation-delay-200 {
-  animation-delay: 0.2s;
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #7dd3fc22 0%, #38bdf822 100%);
+  border-radius: 12px;
+  margin-bottom: 3rem;
 }
 
-.animation-delay-1000 {
-  animation-delay: 1s;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #334155;
+  margin-bottom: 2rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #0ea5e9;
+  border: 2px solid #0ea5e9;
+}
+
+.btn-secondary:hover {
+  background: #0ea5e9;
+  color: white;
+}
+
+.features {
+  margin-bottom: 3rem;
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #0f172a;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+
+.feature-card p {
+  color: #475569;
+  line-height: 1.6;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  color: white;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
