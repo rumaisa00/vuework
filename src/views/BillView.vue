@@ -1,59 +1,49 @@
 <template>
-  <div class="card">
-    <h2>Your Cart</h2>
-
-    <div v-if="items.length === 0" class="empty">
-      Your cart is empty — add something from Pets/Food/Supplies.
-    </div>
-
-    <div v-else>
-      <div
-        v-for="it in items"
-        :key="it.id"
-        class="card"
-        style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem"
-      >
-        <div>
-          <strong>{{ it.name }}</strong>
-          <div class="kv">qty: {{ it.qty }} · ${{ it.price }} each</div>
-        </div>
-        <div>
-          <button class="btn small" @click="remove(it.id)">Remove</button>
-        </div>
-      </div>
-
-      <div style="margin-top:1rem;text-align:right">
-        <div class="kv">Total: ${{ total }}</div>
-        <button class="btn btn-primary" style="margin-top:0.8rem" @click="onCheckout">
-          Checkout
-        </button>
-      </div>
-    </div>
+  <div class="bill-page">
+    <h1>Bill</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in billItems" :key="item.id">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}$</td>
+          <td>{{ item.quantity * item.price }}$</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Total Amount: {{ total }}$</h3>
+    <button @click="printBill" class="btn-print">Print PDF</button>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { useCartStore } from '../stores/cart.js'
-import { useUserStore } from '../stores/user.js'
+import { ref, computed } from 'vue'
 
-const cart = useCartStore()
-const router = useRouter()
+const billItems = ref([
+  { id: 1, name: 'Dog Food', quantity: 2, price: 15 },
+  { id: 2, name: 'Cat Toy', quantity: 1, price: 10 }
+])
 
-const items = cart.items
-const total = cart.total
+const total = computed(() => billItems.value.reduce((sum, i) => sum + i.quantity * i.price, 0))
 
-function remove(id) {
-  cart.removeItem(id)
-}
-
-function onCheckout() {
-  try {
-    const order = cart.checkout()
-    // navigate to Bill with order id and total as query
-    router.push({ name: 'Bill', query: { orderId: order.id, total: order.total } })
-  } catch (err) {
-    alert(err.message || 'Checkout failed')
-  }
-}
+const printBill = () => alert('Print PDF functionality coming soon')
 </script>
+
+<style scoped>
+.bill-page { max-width: 1000px; margin: 2rem auto; padding: 1rem; font-family: 'Poppins', sans-serif; }
+h1 { color: #27ae60; text-align: center; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+th, td { padding: 0.8rem; border: 1px solid #ddd; text-align: center; }
+th { background: #dff9fb; }
+.btn-print { background: #27ae60; color: white; padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; }
+.btn-print:hover { background: #2ecc71; }
+h3 { text-align: right; }
+</style>
