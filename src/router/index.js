@@ -25,7 +25,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/vuework/'), // <--- important for GitHub Pages
   routes
 })
 
