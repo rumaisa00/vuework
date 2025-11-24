@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import CustomerView from '../views/CustomerView.vue'
@@ -25,7 +25,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/vuework/'), // <--- important for GitHub Pages
+  history: createWebHashHistory('/vuework/'), // HASH mode + repo base
   routes
 })
 
