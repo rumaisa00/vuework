@@ -1,47 +1,53 @@
 <template>
-  <div>
-    <h1>Welcome, {{ user?.name }}</h1>
-    <div class="search">
-      <input v-model="search" placeholder="Search..." />
-    </div>
-    <div class="categories">
-      <button @click="filterCategory('all')" :class="{ active: category==='all' }">All</button>
-      <button @click="filterCategory('pets')" :class="{ active: category==='pets' }">Pets</button>
-      <button @click="filterCategory('food')" :class="{ active: category==='food' }">Food</button>
-      <button @click="filterCategory('supplies')" :class="{ active: category==='supplies' }">Supplies</button>
-    </div>
-    <div class="products">
-      <div v-for="item in filteredProducts" :key="item.id" class="card">
-        <img :src="item.image" />
-        <h3>{{ item.name }}</h3>
-        <p>${{ item.price }}</p>
-        <button @click="addToCart(item)">Add to Cart</button>
-      </div>
-    </div>
+  <div class="customer-dashboard">
+    <h1>Customer Dashboard</h1>
+    <h2>Welcome, {{ customerName }}</h2>
+
+```
+<!-- Quick Links -->
+<div class="customer-actions">
+  <router-link v-for="action in actions" :key="action.title" :to="action.link" class="action-card">
+    <div class="action-icon">{{ action.icon }}</div>
+    <h3>{{ action.title }}</h3>
+    <p>{{ action.description }}</p>
+  </router-link>
+</div>
+```
+
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useUserStore } from '../stores/user.js'
-import { useProductsStore } from '../stores/productStore.js'
-import { useCartStore } from '../stores/cart.js'
+import { ref } from 'vue'
 
-const userStore = useUserStore()
-const productStore = useProductsStore()
-const cartStore = useCartStore()
+const customerName = ref('Customer')
 
-const user = userStore.user
-const search = ref('')
-const category = ref('all')
-
-const filteredProducts = computed(() => {
-  let list = productStore.allProducts
-  if(category.value !== 'all') list = list.filter(p => p.type === category.value)
-  if(search.value.trim()) list = list.filter(p => p.name.toLowerCase().includes(search.value.toLowerCase()))
-  return list
-})
-
-function filterCategory(c) { category.value = c }
-function addToCart(item) { cartStore.addToCart(item); alert('Added to cart!') }
+const actions = ref([
+  { title: 'View Menu', description: 'Check pets, food, and supplies', link: '/menu', icon: '🛍️' },
+  { title: 'My Orders', description: 'View order status and bills', link: '/my-orders', icon: '🛒' },
+  { title: 'Cart', description: 'Add or edit items in cart', link: '/cart', icon: '🛒' },
+  { title: 'Rate Services', description: 'Provide feedback for the shop', link: '/rate', icon: '⭐' }
+])
 </script>
+
+<style scoped>
+.customer-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
+  text-align: center;
+}
+h1 { font-size: 2.5rem; color: #27ae60; margin-bottom: 0.5rem; }
+h2 { font-size: 1.5rem; color: #34495e; margin-bottom: 2rem; }
+
+.customer-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.action-card {
+  display: flex;
+  flex-
