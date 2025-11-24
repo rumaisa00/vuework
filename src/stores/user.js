@@ -6,21 +6,13 @@ export const useUserStore = defineStore('user', () => {
   const users = ref([
     { id: 1, name: 'admin', role: 'admin', orders: [] },
     { id: 2, name: 'customer', role: 'customer', orders: [] }
-  ]) // default users for demo
+  ])
 
   const isLoggedIn = computed(() => !!user.value)
 
-  function login(u) {
-    user.value = u
-  }
-
-  function logout() {
-    user.value = null
-  }
-
-  function addUser(u) {
-    users.value.push(u)
-  }
+  function login(u) { user.value = u }
+  function logout() { user.value = null }
+  function addUser(u) { users.value.push(u) }
 
   return { user, users, isLoggedIn, login, logout, addUser }
 })
