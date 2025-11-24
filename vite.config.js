@@ -4,7 +4,10 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/vuework/', // <--- matches your repo name
+
+  // IMPORTANT: must match your GitHub repo name exactly
+  base: '/vuework/',
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
