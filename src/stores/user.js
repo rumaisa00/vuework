@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(null)
-  const users = ref([])
+  const users = ref([
+    { id: 1, name: 'admin', role: 'admin', orders: [] },
+    { id: 2, name: 'customer', role: 'customer', orders: [] }
+  ]) // default users for demo
 
   const isLoggedIn = computed(() => !!user.value)
 
